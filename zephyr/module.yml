@@ -1,3 +1,4 @@
+name: zephyr-wrapper
 build:
   cmake: .
   kconfig: Kconfig
