@@ -1,4 +1,3 @@
 build:
-  name: enya-zephyr-wrapper
   cmake: .
   kconfig: Kconfig
