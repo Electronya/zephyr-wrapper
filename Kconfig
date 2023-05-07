@@ -10,4 +10,4 @@ config ENYA_ZEPHYR_WARPPER
 config ENYA_LED_STRIP
         bool "Enable the Electronya led strip wrapper."
         default n
-        depend on CONFIG_LED_STRIP and ENYA_ZEPHYR_WARPPER
+        depend on ENYA_ZEPHYR_WARPPER && LED_STRIP
