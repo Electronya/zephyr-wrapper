@@ -1,4 +1,4 @@
-name: zephyr-wrapper
+name: Electronya Zephyr Wrapper
 build:
   cmake: .
   kconfig: Kconfig
