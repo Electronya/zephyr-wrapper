@@ -2,12 +2,14 @@
 # Copyright (C) 2023 by Electronya
 
 config ENYA_ZEPHYR_WARPPER
-        bool "Enable Electronya Zephyr Wrapper."
+        bool "Electronya Zephyr Wrapper."
         default n
         help
             Enable the usage of the Electronya Zephyr Wrapper.
 
 config ENYA_LED_STRIP
-        bool "Enable the Electronya led strip wrapper."
+        bool "led strip wrapper"
         default n
         depends on ENYA_ZEPHYR_WARPPER && LED_STRIP
+        help
+            Enable the led strip wrapper.
