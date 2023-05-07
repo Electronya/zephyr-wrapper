@@ -1,9 +1,6 @@
 # Electronya Zephyr Wrapper
 # Copyright (C) 2023 by Electronya
 
-menu "Electronya application options"
-
 config ENYA_ZEPHYR_WARPPER
         bool "Enable Electronya Zephyr Wrapper."
         default n
-endmenu
