@@ -1,0 +1,4 @@
+name: Electronya Zephyr Wrapper
+build:
+  cmake: .
+  kconfig: Kconfig
