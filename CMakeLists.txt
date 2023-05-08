@@ -4,6 +4,7 @@
 zephyr_include_directories(src)
 
 # default wrapper utilities.
+add_subdirectory(src/zephyrCommon)
 # add_subdirectory(src/zephyrThread)
 
 # LED strip wrapper.
