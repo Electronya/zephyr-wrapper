@@ -1,7 +1,7 @@
 # Electronya Zephyr Wrapper
 # Copyright (C) 2023 by Electronya
 
-config ENYA_ZEPHYR_WARPPER
+config ENYA_ZEPHYR_WRAPPER
         bool "Electronya Zephyr Wrapper."
         default n
         help
@@ -10,6 +10,6 @@ config ENYA_ZEPHYR_WARPPER
 config ENYA_LED_STRIP
         bool "led strip wrapper"
         default n
-        depends on ENYA_ZEPHYR_WARPPER && LED_STRIP
+        depends on ENYA_ZEPHYR_WRAPPER && LED_STRIP
         help
             Enable the led strip wrapper.
