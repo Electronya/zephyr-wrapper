@@ -106,12 +106,14 @@ int zephyrLedStripUpdate(ZephyrLedStrip *strip)
       break;
     case LED_STRIP_COLOR_RGBW:
       LOG_ERR("color format %d is not supported yet", strip->colorFmt);
-      return -EINVAL;
+      rc = -EINVAL;
       break;
     default:
       LOG_ERR("color format %d is not supported", strip->colorFmt);
-      return -EINVAL;
+      rc = -EINVAL;
   }
+
+  return rc;
 }
 
 /** @} */
