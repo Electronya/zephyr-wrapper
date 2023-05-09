@@ -1,13 +1,18 @@
 # Electronya Zephyr Wrapper
 # Copyright (C) 2023 by Electronya
 
-zephyr_include_directories(src)
+if(ENYA_ZEPHYR_WRAPPER)
+  zephyr_include_directories(src)
+  zephyr_library()
 
-# default wrapper utilities.
-add_subdirectory(src/zephyrCommon)
-# add_subdirectory(src/zephyrThread)
+  # default wrapper utilities.
+  zephyr_library_sources(
+    src/zephyrCommon/zephyrCommon.c
+    #src/zephyrThread/zephyrThread.c
+  )
 
-# LED strip wrapper.
-if(ENYA_LED_STRIP)
-  add_subdirectory(src/zephyrLedStrip)
+  # LED strip wrapper.
+  if(ENYA_LED_STRIP)
+    zephyr_library_sources(src/zephyrLedStrip/zephyrLedStrip.c)
+  endif()
 endif()
