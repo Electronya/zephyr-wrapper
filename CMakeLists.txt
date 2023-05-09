@@ -13,6 +13,7 @@ if(ENYA_ZEPHYR_WRAPPER)
 
   # LED strip wrapper.
   if(ENYA_LED_STRIP)
+    zephyr_include_directories(src/zephyrLedStrip/)
     zephyr_library_sources(src/zephyrLedStrip/zephyrLedStrip.c)
   endif()
 endif()
