@@ -2,7 +2,7 @@
 # Copyright (C) 2023 by Electronya
 
 if(ENYA_ZEPHYR_WRAPPER)
-  zephyr_include_directories(src)
+  zephyr_include_directories(src/)
   zephyr_library()
 
   # default wrapper utilities.
