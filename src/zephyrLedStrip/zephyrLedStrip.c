@@ -36,7 +36,6 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
                        uint32_t pixelCnt)
 {
   strip->rgbPixels = NULL;
-  strip->rgbwPixels = NULL;
 
   if(device_is_ready(strip->dev))
     LOG_DBG("initializing strip %s with %d pixels of %d color format",
@@ -106,11 +105,11 @@ int zephyrLedStripUpdate(ZephyrLedStrip *strip)
         strip->pixelCount);
       break;
     case LED_STRIP_COLOR_RGBW:
-      LOG_ERR("color format %d is not supported yet", colorFmt);
+      LOG_ERR("color format %d is not supported yet", strip->colorFmt);
       return -EINVAL;
       break;
     default:
-      LOG_ERR("color format %d is not supported", colorFmt);
+      LOG_ERR("color format %d is not supported", strip->colorFmt);
       return -EINVAL;
   }
 }

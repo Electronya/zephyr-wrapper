@@ -67,7 +67,7 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
  * @return          0 if successful, the error code otherwise.
 */
 int zephyrLedStripSetRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
-                              ZephyrRgbLed rgbColor);
+                              const ZephyrRgbLed *rgbColor);
 
 
 /**
