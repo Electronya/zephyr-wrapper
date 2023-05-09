@@ -12,7 +12,11 @@
  * @{
  */
 
+#include <zephyr/logging/log.h>
+
 #include "zephyrCommon.h"
+
+LOG_MODULE_REGISTER(ZEPHYR_WRAPPER_MODULE_NAME);
 
 k_timeout_t zephyrCommonProcessTimeout(uint32_t time, ZephyrTimeUnit unit)
 {
