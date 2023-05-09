@@ -55,7 +55,7 @@ typedef struct
  * @return          0 if successful, the error code otherwise.
  */
 int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
-                       const uint32_t *pixelCnt);
+                       const uint32_t pixelCnt);
 
 /**
  * @brief   Set the desired pixel RGB color.

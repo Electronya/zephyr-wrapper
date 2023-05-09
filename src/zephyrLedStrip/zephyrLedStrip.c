@@ -67,7 +67,7 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
   }
 
   strip->colorFmt = colorFmt;
-  strip->pixelCnt = pixelCnt;
+  strip->pixelCount = pixelCnt;
 
   return 0;
 }
@@ -81,10 +81,10 @@ int zephyrLedStripSetRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
     return -ENODEV;
   }
 
-  if(pixelIdx > strip->pixelCnt)
+  if(pixelIdx > strip->pixelCount)
   {
     LOG_ERR("the given pixel index (%d) is out of range (%d)", pixelIdx,
-      strip->pixelCnt);
+      strip->pixelCount);
     return -EDOM;
   }
 
@@ -102,7 +102,8 @@ int zephyrLedStripUpdate(ZephyrLedStrip *strip)
   switch(strip->colorFmt)
   {
     case LED_STRIP_COLOR_RGB:
-      rc = led_strip_update_rgb(strip->dev, strip->rgbPixels, strip->pixelCnt);
+      rc = led_strip_update_rgb(strip->dev, strip->rgbPixels,
+        strip->pixelCount);
       break;
     case LED_STRIP_COLOR_RGBW:
       LOG_ERR("color format %d is not supported yet", colorFmt);
