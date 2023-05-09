@@ -1,7 +1,7 @@
 # Electronya Zephyr Wrapper
 # Copyright (C) 2023 by Electronya
 
-if(ENYA_ZEPHYR_WRAPPER)
+if(CONFIG_ENYA_ZEPHYR_WRAPPER)
   zephyr_include_directories(src/)
   zephyr_library()
 
@@ -12,8 +12,5 @@ if(ENYA_ZEPHYR_WRAPPER)
   )
 
   # LED strip wrapper.
-  if(ENYA_LED_STRIP)
-    zephyr_include_directories(src/zephyrLedStrip/)
-    zephyr_library_sources(src/zephyrLedStrip/zephyrLedStrip.c)
-  endif()
+  zephyr_library_sources_ifdef(CONFIG_ENYA_LED_STRIP src/zephyrLedStrip/zephyrLedStrip.c)
 endif()
