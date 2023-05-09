@@ -3,7 +3,7 @@
 
 if(CONFIG_ENYA_ZEPHYR_WRAPPER)
   message("RPOUT")
-  zephyr_include_directories(./src/)
+  zephyr_include_directories(./src/zephyrCommon/)
   zephyr_library()
 
   # default wrapper utilities.
