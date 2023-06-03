@@ -1,7 +1,9 @@
 /**
+ * Copyright (C) 2023 by Electronya
+ * 
  * @file      zephyrGpio.h
- * @author    jbacon
- * @date      2021-02-14
+ * @author    jlcharron
+ * @date      2023-06-03
  * @brief     GPIO of ZephyrWrapper module
  * 
  *            This file is the declaration or the GPIO wrapper.

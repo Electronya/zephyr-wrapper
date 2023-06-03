@@ -1,7 +1,9 @@
 /**
+ * Copyright (C) 2023 by Electronya
+ * 
  * @file      zephyrGpio.c
- * @author    jbacon
- * @date      2021-02-14
+ * @author    jlcharron
+ * @date      2023-06-03
  * @brief     GPIO of ZephyrWrapper module
  *
  *            This file is the implementation of the GPIO wrapper.
@@ -20,7 +22,7 @@
 
 #include "zephyrCommon.h"
 
-LOG_MODULE_REGISTER(ZEPHYR_WRAP_MODULE_NAME);
+LOG_MODULE_REGISTER(ZEPHYR_WRAPPER_MODULE_NAME);
 
 int zephyrGpioInit(ZephyrGpio *gpio, ZephyrGpioDir dir)
 {
