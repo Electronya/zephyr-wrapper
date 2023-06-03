@@ -45,7 +45,7 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
         LOG_ERR("unable to allocate memory for %d X RGB pixel", pixelCnt);
         return -ENOSPC;
       }
-      memset(strip->rgbPixels, 0x00, sizeof(ZephyrRgbLed) * pixelCnt);
+      memset(strip->rgbPixels, 0x00, pixelCnt * sizeof(ZephyrRgbLed));
       break;
     default:
       LOG_ERR("color format %d is not supported", colorFmt);
