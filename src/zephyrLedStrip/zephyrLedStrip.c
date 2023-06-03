@@ -26,7 +26,6 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
                        uint32_t pixelCnt)
 {
   strip->rgbPixels = NULL;
-  strip->rgbwPixels = NULL;
 
   if(device_is_ready(strip->dev))
     LOG_DBG("initializing strip %s with %d pixels of %d color format",
