@@ -20,12 +20,16 @@
 #include <zephyr/drivers/led_strip.h>
 
 /**
+ * @brief   The RGB color sequence constructor.
+*/
+#define RGB(_r, _g, _b)         { .r = (_r), .g = (_g), .b = (_b) }
+
+/**
  * @brief   The pixel color format.
 */
 typedef enum
 {
   LED_STRIP_COLOR_RGB,              /**< The RGB color format. */
-  LED_STRIP_COLOR_RGBW,             /**< The RGBW color format. */
   LED_STRIP_COLOR_CNT               /**< The number of color format. */
 } ZephyrLedStripClrFmt;
 
@@ -68,7 +72,6 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
 */
 int zephyrLedStripSetRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
                               const ZephyrRgbLed *rgbColor);
-
 
 /**
  * @brief   Update the strip pixels.

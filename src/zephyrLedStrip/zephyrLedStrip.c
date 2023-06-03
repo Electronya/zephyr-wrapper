@@ -20,22 +20,13 @@
 #include "zephyrLedStrip.h"
 #include "zephyrCommon.h"
 
-/**
- * @brief   The RGB color sequence constructor.
-*/
-#define RGB(_r, _g, _b)         { .r = (_r), .g = (_g), .b = (_b) }
-
-/**
- * @brief   The RGBW color sequence constructor.
-*/
-#define RGBW(_r, _g, _b, _w)    { .r = (_r), .g = (_g), .b = (_b), .w = (_w) }
-
 LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
 int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
                        uint32_t pixelCnt)
 {
   strip->rgbPixels = NULL;
+  strip->rgbwPixels = NULL;
 
   if(device_is_ready(strip->dev))
     LOG_DBG("initializing strip %s with %d pixels of %d color format",
@@ -56,10 +47,6 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
         return -ENOSPC;
       }
       break;
-    case LED_STRIP_COLOR_RGBW:
-      LOG_ERR("color format %d is not supported yet", colorFmt);
-      return -EINVAL;
-      break;
     default:
       LOG_ERR("color format %d is not supported", colorFmt);
       return -EINVAL;
@@ -74,7 +61,7 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
 int zephyrLedStripSetRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
                               const ZephyrRgbLed *rgbColor)
 {
-  if(!strip->dev || !strip->rgbPixels)
+  if(!strip->dev || strip->rgbPixels)
   {
     LOG_ERR("LED strip not yet initialized");
     return -ENODEV;
@@ -103,10 +90,6 @@ int zephyrLedStripUpdate(ZephyrLedStrip *strip)
     case LED_STRIP_COLOR_RGB:
       rc = led_strip_update_rgb(strip->dev, strip->rgbPixels,
         strip->pixelCount);
-      break;
-    case LED_STRIP_COLOR_RGBW:
-      LOG_ERR("color format %d is not supported yet", strip->colorFmt);
-      rc = -EINVAL;
       break;
     default:
       LOG_ERR("color format %d is not supported", strip->colorFmt);
