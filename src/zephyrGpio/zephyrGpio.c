@@ -12,7 +12,6 @@
  * @{
  */
 
-#include <zephyrGpio.h>
 
 #include <zephyr/kernel.h>
 #include <zephyr/device.h>
@@ -21,6 +20,7 @@
 #include <zephyr/sys/util.h>
 
 #include "zephyrCommon.h"
+#include "zephyrGpio.h"
 
 LOG_MODULE_REGISTER(ZEPHYR_WRAPPER_MODULE_NAME);
 
