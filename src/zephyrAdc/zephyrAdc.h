@@ -1,7 +1,9 @@
 /**
+ * Copyright (C) 2023 by Electronya
+ * 
  * @file      zephyrAdc.h
- * @author    jbacon
- * @date      2021-04-09
+ * @author    jlcharron
+ * @date      2023-06-03
  * @brief     ADC of ZephyrWrapper module
  * 
  *            This file is the declaration of the ADC wrapper.
@@ -38,6 +40,8 @@ typedef enum
   ADC_CHAN_14 = 14,                 /**< The ADC channel 14. */
   ADC_CHAN_15 = 15,                 /**< The ADC channel 15. */
   ADC_MAX_CHAN_CNT,                 /**< The ADC maximal channel count. */
+  ADC_DIE_TEMP,                     /**< The die temperature ADC channel. */
+  ADC_VREF,                         /**< The Vref ADC channel*/
 } AdcChanId;
 
 /**
@@ -115,6 +119,15 @@ int zephyrAdcInit(AdcRes resolution,
  * @return          0 if successful, the error code otherwise.
  */
 int zephyrAdcSample(AdcChanId chan, uint32_t *value);
+
+/**
+ * @brief Sample the die temperature ADC channel.
+ *
+ * @param value     The sampled value in degree C.
+ *
+ * @return          0 if successful, the error code otherwise.
+ */
+int zephyrDieTempSample(uint32_t *value);
 
 #endif      /* ADC_WRAPPER */
 

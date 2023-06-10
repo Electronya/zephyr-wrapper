@@ -1,7 +1,9 @@
 /**
+ * Copyright (C) 2023 by Electronya
+ * 
  * @file      zephyrAdc.c
- * @author    jbacon
- * @date      2021-04-09
+ * @author    jcharron
+ * @date      2023-06-03
  * @brief     ADC of ZephyrWrapper module
  *
  *            This file is the implementation of the ADC wrapper
@@ -10,14 +12,14 @@
  * @{
  */
 
-#include <zephyrAdc.h>
 
 #include <zephyr/device.h>
 #include <zephyr/logging/log.h>
 
 #include "zephyrCommon.h"
+#include "zephyrAdc.h"
 
-LOG_MODULE_DECLARE(ZEPHYR_WRAP_MODULE_NAME);
+LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
 /**
  * @brief The ADC reference voltage.
@@ -97,7 +99,7 @@ int zephyrAdcInit(AdcRes resolution,
   return rc;
 }
 
-int zephyrAdcSample(AdcChanId chan, uint32_t *value)
+int zephyrAdcSample(AdcChanId chan, uint32_t *value, flag Vref)
 {
   int rc;
 
@@ -116,6 +118,33 @@ int zephyrAdcSample(AdcChanId chan, uint32_t *value)
   if(rc < 0)
   {
     LOG_ERR("ERR: %d - Unable to convert ADC sample of channel %d", rc, chan);
+    return rc;
+  }
+
+  *value = adcCtrlData.buffers[chan];
+
+  return rc;
+}
+
+int zephyrDieTempSample(uint32_t *value)
+{
+  int rc;
+
+  adcCtrlData.seq.channels = BIT(ADC_DIE_TEMP);
+  adcCtrlData.seq.buffer = (void *)(adcCtrlData.buffers + ADC_DIE_TEMP);
+
+  rc = adc_read(adcCtrlData.adc, &(adcCtrlData.seq));
+  if(rc)
+  {
+    LOG_ERR("ERR: %d - Unable to read ADC channel %d.", rc, ADC_DIE_TEMP);
+    return rc;
+  }
+
+  rc = adc_raw_to_millivolts(ADC_REF_VOLT, adcCtrlData.chanCfgs[chan].gain,
+      adcCtrlData.seq.resolution, adcCtrlData.buffers + chan);
+  if(rc < 0)
+  {
+    LOG_ERR("ERR: %d - Unable to convert ADC sample of channel %d", rc, ADC_DIE_TEMP);
     return rc;
   }
 
