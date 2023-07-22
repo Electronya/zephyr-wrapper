@@ -66,7 +66,7 @@ uint32_t zephyrLedStripGetPixelCnt(ZephyrLedStrip *strip)
 int zephyrLedStripSetRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
                               const ZephyrRgbLed *rgbColor)
 {
-  if(!strip->dev || strip->rgbPixels)
+  if(!strip->dev || !strip->rgbPixels)
   {
     LOG_ERR("LED strip not yet initialized");
     return -ENODEV;
@@ -88,6 +88,12 @@ int zephyrLedStripSetRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
 int zephyrLedStripUpdate(ZephyrLedStrip *strip)
 {
   int rc;
+
+  if(!strip->dev || !strip->rgbPixels)
+  {
+    LOG_ERR("LED strip not yet initialized");
+    return -ENODEV;
+  }
 
   switch(strip->colorFmt)
   {
