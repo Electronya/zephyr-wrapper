@@ -58,6 +58,11 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
   return 0;
 }
 
+uint32_t zephyrLedStripGetPixelCnt(ZephyrLedStrip *strip)
+{
+  return strip->pixelCount;
+}
+
 int zephyrLedStripSetRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
                               const ZephyrRgbLed *rgbColor)
 {

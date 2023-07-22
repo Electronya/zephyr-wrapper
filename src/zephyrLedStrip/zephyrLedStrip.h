@@ -62,6 +62,14 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
                        const uint32_t pixelCnt);
 
 /**
+ * @brief   Get the pixel count of the LED strip.
+ *
+ * @param strip     The LED strip.
+ * @return          The count of pixel in the LED strip.
+ */
+uint32_t zephyrLedStripGetPixelCnt(ZephyrLedStrip *strip);
+
+/**
  * @brief   Set the desired pixel RGB color.
  *
  * @param strip     The LED strip data structure to set.
