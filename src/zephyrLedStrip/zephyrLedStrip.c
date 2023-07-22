@@ -63,7 +63,7 @@ uint32_t zephyrLedStripGetPixelCnt(ZephyrLedStrip *strip)
   return strip->pixelCount;
 }
 
-int zephyrLedStripSetRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
+int zephyrLedStripSetPixelRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
                               const ZephyrRgbLed *rgbColor)
 {
   if(!strip->dev || !strip->rgbPixels)
@@ -81,6 +81,46 @@ int zephyrLedStripSetRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
 
   memset(strip->rgbPixels + pixelIdx, 0x00, sizeof(ZephyrRgbLed));
   memcpy(strip->rgbPixels + pixelIdx, rgbColor, sizeof(ZephyrRgbLed));
+
+  return 0;
+}
+
+int zephyrLedStripSetPixelsRgbColor(ZephyrLedStrip *strip, uint32_t start,
+                                    uint32_t end, const ZephyrRgbLed *rgbColors)
+{
+  uint32_t pixelCount;
+
+  if(!strip->dev || !strip->rgbPixels)
+  {
+    LOG_ERR("LED strip not yet initialized");
+    return -ENODEV;
+  }
+
+  if(start > end)
+  {
+    LOG_ERR("the given start index (%d) is larger than the given end index (%d)",
+      start, end);
+    return -EINVAL;
+  }
+
+  if(start > strip->pixelCount)
+  {
+    LOG_ERR("the given start index (%d) is out of range (%d)", start,
+      strip->pixelCount);
+    return -EDOM;
+  }
+
+  if(end > strip->pixelCount)
+  {
+    LOG_ERR("the given end index (%d) is out of range (%d)", end,
+      strip->pixelCount);
+    return -EDOM;
+  }
+
+  pixelCount = end - start;
+  memset(strip->rgbPixels + start, 0x00, pixelCount * sizeof(ZephyrRgbLed));
+  memcpy(strip->rgbPixels + start, rgbColors,
+    pixelCount * sizeof(ZephyrRgbLed));
 
   return 0;
 }

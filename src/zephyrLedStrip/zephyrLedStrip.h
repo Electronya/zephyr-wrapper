@@ -78,8 +78,21 @@ uint32_t zephyrLedStripGetPixelCnt(ZephyrLedStrip *strip);
  *
  * @return          0 if successful, the error code otherwise.
 */
-int zephyrLedStripSetRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
-                              const ZephyrRgbLed *rgbColor);
+int zephyrLedStripSetPixelRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
+                                   const ZephyrRgbLed *rgbColor);
+
+/**
+ * @brief   Set the pixels included between the start and
+ *
+ * @param strip     The LED strip data structure to set.
+ * @param start     The index of the starting pixel.
+ * @param end       The index of the ending pixel.
+ * @param rgbColors The pixel colors.
+ *
+ * @return          0 if successful, the error code otherwise.
+ */
+int zephyrLedStripSetPixelsRgbColor(ZephyrLedStrip *strip, uint32_t start,
+                                    uint32_t end, const ZephyrRgbLed *rgbColors);
 
 /**
  * @brief   Update the strip pixels.
