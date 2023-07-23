@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2023 by Electronya
  *
- * @file      zephyrLedStrip.h
+ * @file      zephyrLedStrip.c
  * @author    jbacon
  * @date      2023-05-06
  * @brief     LED Strip Wrapper
