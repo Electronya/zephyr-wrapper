@@ -232,7 +232,7 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
   strip->colorFmt = colorFmt;
   strip->pixelCount = pixelCnt;
 
-  rc = zephyrLedStripInitTimingCntr(&strip);
+  rc = zephyrLedStripInitTimingCntr(strip);
   if(rc < 0)
     return rc;
 
