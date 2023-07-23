@@ -38,7 +38,7 @@ static int32_t calculateTicks(ZephyrLedStrip *strip)
   uint32_t ticks;
   float period;
 
-  freq = zephyrCounterGetFreq(strip->timingCntr);
+  freq = zephyrCounterGetFreq(&strip->timingCntr);
   period = (1 / ((float)freq)) * 1000000000;
 
   /* find the smallest timing */
@@ -117,10 +117,10 @@ static void transmitBit(ZephyrLedStrip *strip)
   uint8_t txBit;
   uint16_t bitOverflow;
   uint16_t lvlOverflow;
+  uint8_t *pixels = (uint8_t *)strip->pixels;
 
   /* get the bit to transmit */
-  txBit = (strip->pixels[strip->byteIdx] & (0x01 << strip->bitIdx)) >>
-    strip->bitIdx;
+  txBit = (pixels[strip->byteIdx] & (0x01 << strip->bitIdx)) >> strip->bitIdx;
 
   /* calculate the overflows */
   if(txBit)
@@ -200,7 +200,7 @@ static int zephyrLedStripInitTimingCntr(ZephyrLedStrip *strip)
   int rc;
   uint32_t ticks;
 
-  rc = zephyrCounterInit(strip->timingCntr);
+  rc = zephyrCounterInit(&strip->timingCntr);
   if(rc < 0)
     return rc;
 
@@ -211,11 +211,11 @@ static int zephyrLedStripInitTimingCntr(ZephyrLedStrip *strip)
     return ticks;
   }
 
-  strip->timingCntr->topConfig.ticks = ticks;
-  strip->timingCntr->topConfig.callback = counterCallback;
-  strip->timingCntr->topConfig.user_data = strip;
+  strip->timingCntr.topConfig.ticks = ticks;
+  strip->timingCntr.topConfig.callback = counterCallback;
+  strip->timingCntr.topConfig.user_data = strip;
 
-  rc = zephyrCounterSetTop(strip->timingCntr);
+  rc = zephyrCounterSetTop(&strip->timingCntr);
   if(rc < 0)
     LOG_ERR("unable to set the timing counter top configuration");
 
@@ -226,15 +226,13 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
                        uint32_t pixelCnt)
 {
   int rc;
-  size_t pixelSize;
 
   strip->pixels = NULL;
-  strip->pixelIdx = 0;
   strip->tickCntr = 0;
   strip->colorFmt = colorFmt;
   strip->pixelCount = pixelCnt;
 
-  rc = zephyrLedStripInitTimingCntr(&strip->timingCntr, &strip->txData);
+  rc = zephyrLedStripInitTimingCntr(&strip);
   if(rc < 0)
     return rc;
 
@@ -295,7 +293,7 @@ int zephyrLedStripSetRgbPixel(ZephyrLedStrip *strip, uint32_t pixelIdx,
     return -EINVAL;
   }
 
-  bytecpy(strip->pixels + pixelIdx, pixel, sizeof(ZephyrRgbPixel));
+  bytecpy((uint8_t *)strip->pixels + pixelIdx, pixel, sizeof(ZephyrRgbPixel));
 
   return 0;
 }
@@ -339,7 +337,8 @@ int zephyrLedStripSetRgbPixels(ZephyrLedStrip *strip, uint32_t start,
   }
 
   pixelCount = end - start;
-  bytecpy(strip->pixels + start, pixels, pixelCount * sizeof(ZephyrRgbPixel));
+  bytecpy((uint8_t *)strip->pixels + start, pixels,
+    pixelCount * sizeof(ZephyrRgbPixel));
 
   return 0;
 }
@@ -366,7 +365,7 @@ int zephyrLedStripSetGrbPixel(ZephyrLedStrip *strip, uint32_t pixelIdx,
     return -EINVAL;
   }
 
-  bytecpy(strip->pixels + pixelIdx, pixel, sizeof(ZephyrGrbPixel));
+  bytecpy((uint8_t *)strip->pixels + pixelIdx, pixel, sizeof(ZephyrGrbPixel));
 
   return 0;
 }
@@ -410,7 +409,8 @@ int zephyrLedStripSetGrbPixels(ZephyrLedStrip *strip, uint32_t start,
   }
 
   pixelCount = end - start;
-  bytecpy(strip->pixels + start, pixels, pixelCount * sizeof(ZephyrGrbPixel));
+  bytecpy((uint8_t *)strip->pixels + start, pixels,
+    pixelCount * sizeof(ZephyrGrbPixel));
 
   return 0;
 }
@@ -437,7 +437,7 @@ int zephyrLedStripSetRgbwPixel(ZephyrLedStrip *strip, uint32_t pixelIdx,
     return -EINVAL;
   }
 
-  bytecpy(strip->pixels + pixelIdx, pixel, sizeof(ZephyrRgbwPixel));
+  bytecpy((uint8_t *)strip->pixels + pixelIdx, pixel, sizeof(ZephyrRgbwPixel));
 
   return 0;
 }
@@ -481,7 +481,8 @@ int zephyrLedStripSetRgbwPixels(ZephyrLedStrip *strip, uint32_t start,
   }
 
   pixelCount = end - start;
-  bytecpy(strip->pixels + start, pixels, pixelCount * sizeof(ZephyrRgbwPixel));
+  bytecpy((uint8_t *)strip->pixels + start, pixels,
+    pixelCount * sizeof(ZephyrRgbwPixel));
 
   return 0;
 }

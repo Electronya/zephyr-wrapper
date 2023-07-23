@@ -26,7 +26,7 @@
 /**
  * @brief   The RGBW color sequence constructor.
 */
-#define RGPW(_r, _g, _b, _w)    { .r = (_r), .g = (_g), .b = (_b), .w = (_w) };
+#define RGBW(_r, _g, _b, _w)    { .r = (_r), .g = (_g), .b = (_b), .w = (_w) };
 
 /**
  * @brief   The pixel color format.
@@ -84,7 +84,7 @@ typedef struct
   uint16_t t0l;                     /**< The 0 bit low timing value (ns).*/
   uint16_t t1h;                     /**< The 1 bit high timing value (ns). */
   uint16_t t1l;                     /**< The 1 bit low timing value (ns). */
-  uint16_t rst;                     /**< The reset timing value (ns). */
+  uint32_t rst;                     /**< The reset timing value (ns). */
   ZephyrGpio dataLine;              /**< The data line. */
   uint32_t pixelCount;              /**< The pixel count in the led strip. */
   ZephyrLedStripClrFmt colorFmt;    /**< The pixel color format. */
