@@ -46,35 +46,6 @@ static void calculateTicks(ZephyrLedStrip *strip)
 
   ticks = (uint32_t)(tmpTiming / period);
 
-  /* validate the tick count */
-  ticksPerTiming = strip->t0h / ticks;
-  if((ticksPerTiming * strip->t0h) < strip->t0h - LED_STRIP_TIMING_TOLERANCE ||
-     (ticksPerTiming * strip->t0h) > strip->t0h + LED_STRIP_TIMING_TOLERANCE)
-  {
-    return -EINVAL;
-  }
-
-  ticksPerTiming = strip->t0l / ticks;
-  if((ticksPerTiming * strip->t0l) < strip->t0l - LED_STRIP_TIMING_TOLERANCE ||
-     (ticksPerTiming * strip->t0l) > strip->t0l + LED_STRIP_TIMING_TOLERANCE)
-  {
-    return -EINVAL;
-  }
-
-  ticksPerTiming = strip->t1h / ticks;
-  if((ticksPerTiming * strip->t1h) < strip->t1h - LED_STRIP_TIMING_TOLERANCE ||
-     (ticksPerTiming * strip->t1h) > strip->t1h + LED_STRIP_TIMING_TOLERANCE)
-  {
-    return -EINVAL;
-  }
-
-  ticksPerTiming = strip->t1l / ticks;
-  if((ticksPerTiming * strip->t1l) < strip->t1l - LED_STRIP_TIMING_TOLERANCE ||
-     (ticksPerTiming * strip->t1l) > strip->t1l + LED_STRIP_TIMING_TOLERANCE)
-  {
-    return -EINVAL;
-  }
-
   strip->tickPeriod = period * ticks;
   strip->timingCntr.topConfig.ticks = ticks;
 }
