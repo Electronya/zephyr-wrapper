@@ -27,10 +27,8 @@ LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
  * @brief   Calculate the timing counter ticks value.
  *
  * @param strip     The LED strip data structure.
- *
- * @return            The ticks value if successful, the error code otherwise.
  */
-static int32_t calculateTicks(ZephyrLedStrip *strip)
+static void calculateTicks(ZephyrLedStrip *strip)
 {
   uint16_t tmpTiming;
   uint32_t freq;
@@ -78,8 +76,7 @@ static int32_t calculateTicks(ZephyrLedStrip *strip)
   }
 
   strip->tickPeriod = period * ticks;
-
-  return ticks;
+  strip->timingCntr.topConfig.ticks = ticks;
 }
 
 /**
@@ -204,14 +201,7 @@ static int zephyrLedStripInitTimingCntr(ZephyrLedStrip *strip)
   if(rc < 0)
     return rc;
 
-  ticks = calculateTicks(strip);
-  if(ticks < 0)
-  {
-    LOG_ERR("unable to calculate the counter ticks");
-    return ticks;
-  }
-
-  strip->timingCntr.topConfig.ticks = ticks;
+  calculateTicks(strip);
   strip->timingCntr.topConfig.callback = counterCallback;
   strip->timingCntr.topConfig.user_data = strip;
 
