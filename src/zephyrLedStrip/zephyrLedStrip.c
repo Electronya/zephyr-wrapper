@@ -32,7 +32,6 @@ static void calculateTicks(ZephyrLedStrip *strip)
 {
   uint16_t tmpTiming;
   uint32_t freq;
-  uint32_t ticksPerTiming;
   uint32_t ticks;
   float period;
 
@@ -46,7 +45,7 @@ static void calculateTicks(ZephyrLedStrip *strip)
 
   ticks = (uint32_t)(tmpTiming / period);
 
-  strip->tickPeriod = period * ticks;
+  strip->tickPeriod = (uint32_t)period * ticks;
   strip->timingCntr.topConfig.ticks = ticks;
 }
 
@@ -166,7 +165,6 @@ static void counterCallback(const struct device *dev, void *userData)
 static int zephyrLedStripInitTimingCntr(ZephyrLedStrip *strip)
 {
   int rc;
-  uint32_t ticks;
 
   rc = zephyrCounterInit(&strip->timingCntr);
   if(rc < 0)

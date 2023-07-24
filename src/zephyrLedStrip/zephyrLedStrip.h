@@ -78,7 +78,7 @@ typedef struct
   ZephyrCounter timingCntr;         /**< The bit timing counter. */
   uint32_t byteIdx;                 /**< The current Tx byte index. */
   uint8_t bitIdx;                   /**< The bit index. */
-  uint16_t tickPeriod;              /**< The tick period (ns). */
+  uint32_t tickPeriod;              /**< The tick period (ns). */
   uint32_t tickCntr;                /**< The tick counter. */
   uint16_t t0h;                     /**< The 0 bit high timing value (ns).*/
   uint16_t t0l;                     /**< The 0 bit low timing value (ns).*/
