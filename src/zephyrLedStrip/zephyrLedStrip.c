@@ -340,7 +340,7 @@ int zephyrLedStripSetGrbPixels(ZephyrLedStrip *strip, uint32_t start,
     return -ENODEV;
   }
 
-  if(strip->colorFmt != LED_STRIP_COLOR_RGBW)
+  if(strip->colorFmt != LED_STRIP_COLOR_GRB)
   {
     LOG_ERR("LED strip of bad color format");
     return -EINVAL;
