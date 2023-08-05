@@ -78,7 +78,7 @@ static bool processReset(ZephyrLedStrip *strip)
  *
  * @param strip   The LED strip.
  */
-static void transmitBit(ZephyrLedStrip *strip)
+void transmitBit(ZephyrLedStrip *strip)
 {
   int rc;
   uint8_t txBit;
@@ -133,7 +133,7 @@ static void transmitBit(ZephyrLedStrip *strip)
  * @param dev       The counter device.
  * @param userData  The user data.
  */
-static void counterCallback(const struct device *dev, void *userData)
+void counterCallback(const struct device *dev, void *userData)
 {
   int rc;
   ZephyrLedStrip *strip = (ZephyrLedStrip *)userData;
