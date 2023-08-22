@@ -23,7 +23,6 @@
  */
 typedef struct zephyrGpio
 {
-  const char *label;                                  /**< The GPIO label. */
   const struct gpio_dt_spec dev;                      /**< The GPIO device. */
   struct gpio_callback cbStruct;                      /**< The callback structure. */
 } ZephyrGpio;
