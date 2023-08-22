@@ -1,15 +1,29 @@
 # Electronya Zephyr Wrapper
 # Copyright (C) 2023 by Electronya
 
-config ENYA_ZEPHYR_WARPPER
+config ENYA_ZEPHYR_WRAPPER
         bool "Electronya Zephyr Wrapper."
         default n
         help
             Enable the usage of the Electronya Zephyr Wrapper.
 
-config ENYA_LED_STRIP
-        bool "led strip wrapper"
+config ENYA_GPIO
+        bool "GPIO wrapper"
         default n
-        depends on ENYA_ZEPHYR_WARPPER && LED_STRIP
+        depends on ENYA_ZEPHYR_WRAPPER && GPIO
         help
-            Enable the led strip wrapper.
+            Enable the GPIO wrapper.
+
+config ENYA_COUNTER
+        bool "counter wrapper"
+        default n
+        depends on ENYA_ZEPHYR_WRAPPER && COUNTER
+        help
+            Enable the counter wrapper.
+
+config ENYA_LED_STRIP
+        bool "LED strip wrapper"
+        default n
+        depends on ENYA_ZEPHYR_WRAPPER && ENYA_GPIO && ENYA_COUNTER
+        help
+            Enable the LED strip wrapper.
