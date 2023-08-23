@@ -24,7 +24,7 @@ void zephyrThreadCreate(ZephyrThread *thread, char *name,
   k_thread_create(&thread->data, thread->stack, thread->stackSize,
     thread->entry, thread->p1, thread->p2, thread->p3, thread->priority,
     thread->options, zephyrCommonProcessTimeout(startDelay, timeUnit));
-  k_thread_name_set(&thread->data);
+  k_thread_name_set(&thread->data, name);
 }
 
 void zephyrThreadAbort(ZephyrThread *thread)
@@ -54,17 +54,17 @@ void zephyrThreadYield(void)
 
 uint32_t zephyrThreadSleep(uint32_t time, ZephyrTimeUnit unit)
 {
-  k_sleep(zephyrCommonProcessTimeout(time, unit));
+  return k_sleep(zephyrCommonProcessTimeout(time, unit));
 }
 
 uint32_t zephyrThreadSleepMs(uint32_t ms)
 {
-  k_msleep(ms);
+  return k_msleep(ms);
 }
 
 uint32_t zephyrThreadSleepUs(uint32_t us)
 {
-  k_usleep(us);
+  return k_usleep(us);
 }
 
 /** @} */
