@@ -67,4 +67,10 @@ uint32_t zephyrThreadSleepUs(uint32_t us)
   return k_usleep(us);
 }
 
+void zephyrThreadJoin(ZephyrThread *thread, uint32_t timeout,
+                      ZephyrTimeUnit timeoutUnit)
+{
+  k_thread_join(&thread->data, zephyrCommonProcessTimeout(timeout, timeoutUnit));
+}
+
 /** @} */

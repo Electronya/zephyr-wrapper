@@ -109,7 +109,15 @@ uint32_t zephyrThreadSleepMs(uint32_t ms);
  */
 uint32_t zephyrThreadSleepUs(uint32_t us);
 
-void zephyrThread
+/**
+ * @brief   Join a thread. Sleep until it finishes.
+ *
+ * @param thread      The thread to join.
+ * @param timeout     The timeout.
+ * @param timeoutUnit The timeout time unit.
+ */
+void zephyrThreadJoin(ZephyrThread *thread, uint32_t timeout,
+                      ZephyrTimeUnit timeoutUnit);
 
 #endif    /* THREAD_WRAPPER */
 
