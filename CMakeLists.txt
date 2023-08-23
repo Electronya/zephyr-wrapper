@@ -10,7 +10,7 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
   # default wrapper utilities.
   zephyr_library_sources(
     ./src/zephyrCommon/zephyrCommon.c
-    #./src/zephyrThread/zephyrThread.c
+    ./src/zephyrThread/zephyrThread.c
   )
 
   # GPIO wrapper.
