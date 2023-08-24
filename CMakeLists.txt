@@ -4,6 +4,7 @@
 if(CONFIG_ENYA_ZEPHYR_WRAPPER)
   zephyr_include_directories(
     ./src/zephyrCommon/
+    ./src/zephyrThread/
   )
   zephyr_library()
 
