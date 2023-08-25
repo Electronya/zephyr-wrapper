@@ -30,13 +30,13 @@ int zephyrGpioInit(ZephyrGpio *gpio, ZephyrGpioDir dir)
   if(!device_is_ready(gpio->dev.port))
   {
     rc = -ENODEV;
-    LOG_ERR("gpio %s device not ready", gpio->dev->port->name);
+    LOG_ERR("gpio %s device not ready", gpio->dev.port->name);
     return rc;
   }
 
   rc = gpio_pin_configure_dt(&(gpio->dev), dir);
   if(rc < 0)
-    LOG_ERR("unable to configure gpio %s", gpio->dev->port->name);
+    LOG_ERR("unable to configure gpio %s", gpio->dev.port->name);
 
   return rc;
 }
@@ -47,7 +47,7 @@ int zephyrGpioEnableIrq(ZephyrGpio *gpio, ZephyrGpioIrqTrig trigger)
 
   rc = gpio_pin_interrupt_configure_dt(&(gpio->dev), trigger);
   if(rc < 0)
-    LOG_ERR("unable to enable gpio %s interrupt", gpio->dev->port->name);
+    LOG_ERR("unable to enable gpio %s interrupt", gpio->dev.port->name);
 
   return rc;
 }
@@ -58,7 +58,7 @@ int zephyrGpioDisableIrq(ZephyrGpio *gpio)
 
   rc = gpio_pin_interrupt_configure_dt(&(gpio->dev), GPIO_INT_DISABLE);
   if(rc < 0)
-    LOG_ERR("unable to disable gpio %s interrupt", gpio->dev->port->name);
+    LOG_ERR("unable to disable gpio %s interrupt", gpio->dev.port->name);
 
   return rc;
 }
@@ -70,7 +70,7 @@ int zephyrGpioAddIrqCallback(ZephyrGpio *gpio, ZephyrGpioIrqCb irqCb)
   gpio_init_callback(&(gpio->cbStruct), irqCb, BIT(gpio->dev.pin));
   rc = gpio_add_callback(gpio->dev.port, &(gpio->cbStruct));
   if(rc < 0)
-    LOG_ERR("unable to add gpio %s interrupt callback.", gpio->dev->port->name);
+    LOG_ERR("unable to add gpio %s interrupt callback.", gpio->dev.port->name);
 
   return rc;
 }

@@ -4,14 +4,17 @@
 if(CONFIG_ENYA_ZEPHYR_WRAPPER)
   zephyr_include_directories(
     ./src/zephyrCommon/
+    ./src/zephyrThread/
   )
   zephyr_library()
 
   # default wrapper utilities.
-  zephyr_library_sources(
-    ./src/zephyrCommon/zephyrCommon.c
-    #./src/zephyrThread/zephyrThread.c
-  )
+  if(NOT DEFINED CONFIG_ZTEST)
+    zephyr_library_sources(
+      ./src/zephyrCommon/zephyrCommon.c
+      ./src/zephyrThread/zephyrThread.c
+    )
+  endif()
 
   # GPIO wrapper.
   if(CONFIG_ENYA_GPIO)
