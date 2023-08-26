@@ -40,3 +40,15 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
     endif()
   endif()
 endif()
+
+# USB stuff.
+if(CONFIG_ENYA_USB)
+  zephyr_include_directories(./src/)
+  if(NOT DEFINED CONFIG_ZTEST)
+    zephyr_library_sources(./src/zephyrUSB/zephyrUSB.c)
+  endif()
+  # USB CDC ACM\
+  if(CONFIG_ENYA_USB_ACM AND NOT DEFINED CONFIG_ZTEST)
+    zephyr_library_sources(./src/zephyrUSB/zephyrACM.c)
+  endif()
+endif()
