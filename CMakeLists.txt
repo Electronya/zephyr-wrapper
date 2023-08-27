@@ -47,7 +47,7 @@ if(CONFIG_ENYA_USB)
   if(NOT DEFINED CONFIG_ZTEST)
     zephyr_library_sources(./src/zephyrUSB/zephyrUSB.c)
   endif()
-  # USB CDC ACM\
+  # USB CDC ACM
   if(CONFIG_ENYA_USB_ACM AND NOT DEFINED CONFIG_ZTEST)
     zephyr_library_sources(./src/zephyrUSB/zephyrACM.c)
   endif()
