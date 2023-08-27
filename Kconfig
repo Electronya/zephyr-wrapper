@@ -31,7 +31,7 @@ config ENYA_LED_STRIP
 config ENYA_USB
         bool "USB wrapper"
         default n
-        depends on ENYA_ZEPHYR_WRAPPER && USB_DEVICE_STACK
+        depends on ENYA_ZEPHYR_WRAPPER
         help
             Enable the USB wrapper.
 
