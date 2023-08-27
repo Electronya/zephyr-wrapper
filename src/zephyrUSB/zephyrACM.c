@@ -20,7 +20,7 @@
 
 LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
-int zephyrAcmInit(ZephyrACM *acm, size_t bufSize)
+int zephyrAcmInit(ZephyrACM *acm, size_t rxBufSize, size_t txBufsize)
 {
   int rc;
 
@@ -31,14 +31,14 @@ int zephyrAcmInit(ZephyrACM *acm, size_t bufSize)
 		return -ENODEV;
 	}
 
-  acm->rxBuffer = k_malloc(bufSize);
+  acm->rxBuffer = k_malloc(rxBufSize);
   if(!acm->rxBuffer)
   {
     LOG_ERR("unable to allocate Rx buffer");
     return -ENOSPC;
   }
 
-  acm->txBuffer = k_malloc(bufSize);
+  acm->txBuffer = k_malloc(txBufsize);
   if(!acm->txBuffer)
   {
     LOG_ERR("unable the allocate Tx buffer");
@@ -46,8 +46,8 @@ int zephyrAcmInit(ZephyrACM *acm, size_t bufSize)
     return -ENOSPC;
   }
 
-  ring_buf_init(&acm->rxRingBuf, bufSize, acm->rxBuffer);
-  ring_buf_init(&acm->txRingBuf, bufSize, acm->txBuffer);
+  ring_buf_init(&acm->rxRingBuf, rxBufSize, acm->rxBuffer);
+  ring_buf_init(&acm->txRingBuf, txBufsize, acm->txBuffer);
 
   rc = uart_irq_callback_set(acm->dev, acm->cb);
   if(rc < 0)

@@ -48,12 +48,13 @@ typedef enum
 /**
  * @brief   Initialize the ACM.
  *
- * @param acm     The ACM device to initialize.
- * @param bufSize The ACM buffer size.
+ * @param acm       The ACM device to initialize.
+ * @param rxBufSize The ACM Rx buffer size.
+ * @param txBufSize The ACM Tx buffer size.
  *
  * @return  0 if successful, the error code otherwise.
  */
-int zephyrAcmInit(ZephyrACM *acm, size_t bufSize);
+int zephyrAcmInit(ZephyrACM *acm, size_t rxBufSize, size_t txBufsize);
 
 /**
  * @brief   Get the state of a control line.
