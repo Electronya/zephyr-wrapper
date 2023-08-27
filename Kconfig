@@ -33,7 +33,8 @@ config ENYA_USB
         default n
         depends on ENYA_ZEPHYR_WRAPPER
         help
-            Enable the USB wrapper.
+            Enable the USB wrapper. IMPORTANT: This has USB_DEVICE_STACK as a
+            dependencies, but it's in the depends on for testing purpose.
 
 config ENYA_USB_ACM
         bool "USB ACM wrapper"
