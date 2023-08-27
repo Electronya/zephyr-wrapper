@@ -43,7 +43,7 @@ endif()
 
 # USB stuff.
 if(CONFIG_ENYA_USB)
-  zephyr_include_directories(./src/)
+  zephyr_include_directories(./src/zephyrUSB)
   if(NOT DEFINED CONFIG_ZTEST)
     zephyr_library_sources(./src/zephyrUSB/zephyrUSB.c)
   endif()
