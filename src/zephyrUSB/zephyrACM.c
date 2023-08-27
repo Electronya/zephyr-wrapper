@@ -159,8 +159,8 @@ int zephyrAcmReadRingBuffer(ZephyrACM *acm, uint8_t *dataBuf,
   return ring_buf_get(&acm->rxRingBuf, dataBuf, dataBufSize);
 }
 
-int zephyrAcmReadRingBuffer(ZephyrACM *acm, uint8_t *dataBuf,
-                            size_t dataBufSize)
+int zephyrAcmWriteRingBuffer(ZephyrACM *acm, uint8_t *dataBuf,
+                             size_t dataBufSize)
 {
   return ring_buf_put(&acm->txRingBuf, dataBuf, dataBufSize);
 }
