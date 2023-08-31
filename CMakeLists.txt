@@ -4,6 +4,7 @@
 if(CONFIG_ENYA_ZEPHYR_WRAPPER)
   zephyr_include_directories(
     ./src/zephyrCommon/
+    ./src/zephyrRingBuffer/
     ./src/zephyrThread/
   )
   zephyr_library()
@@ -12,6 +13,7 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
   if(NOT DEFINED CONFIG_ZTEST)
     zephyr_library_sources(
       ./src/zephyrCommon/zephyrCommon.c
+      ./src/zephyrRingBuffer/zephyrRingBuffer.c
       ./src/zephyrThread/zephyrThread.c
     )
   endif()
