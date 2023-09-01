@@ -22,7 +22,7 @@ LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
 void zephyrRingBufInit(ZephyrRingBuffer *buffer, size_t size, uint8_t *data)
 {
-  ring_buf_init(buffer);
+  ring_buf_init(buffer, size, data);
 }
 
 bool zephyrRingBufIsEmpty(ZephyrRingBuffer *buffer)
