@@ -131,7 +131,7 @@ size_t zephyrRingBufClaimGetting(ZephyrRingBuffer *buffer, uint8_t **data,
  * @param size
  * @return int
  */
-int zephyrRingBufFinishingGetting(ZephyrRingBuffer *buffer, size_t size);
+int zephyrRingBufFinishGetting(ZephyrRingBuffer *buffer, size_t size);
 
 /**
  * @brief   Get data from a ring buffer.

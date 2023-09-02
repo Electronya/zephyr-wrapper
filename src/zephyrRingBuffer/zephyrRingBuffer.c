@@ -72,7 +72,7 @@ size_t zephyrRingBufClaimGetting(ZephyrRingBuffer *buffer, uint8_t **data,
   return ring_buf_get_claim(buffer, data, size);
 }
 
-int zephyrRingBufFinishingGetting(ZephyrRingBuffer *buffer, size_t size)
+int zephyrRingBufFinishGetting(ZephyrRingBuffer *buffer, size_t size)
 {
   return ring_buf_get_finish(buffer, size);
 }
