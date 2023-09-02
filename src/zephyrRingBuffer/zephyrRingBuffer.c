@@ -50,7 +50,7 @@ size_t zephyrRingBufGetUsedSpace(ZephyrRingBuffer *buffer)
   return ring_buf_size_get(buffer);
 }
 
-size_t zephyrRingBufClaimForPutting(ZephyrRingBuffer *buffer, uint8_t **data,
+size_t zephyrRingBufClaimPutting(ZephyrRingBuffer *buffer, uint8_t **data,
                                     size_t size)
 {
   return ring_buf_put_claim(buffer, data, size);

@@ -84,8 +84,8 @@ size_t zephyrRingBufGetUsedSpace(ZephyrRingBuffer *buffer);
  * @return  The size of the claimed area, which may be smaller than the
  *          requested one.
  */
-size_t zephyrRingBufClaimForPutting(ZephyrRingBuffer *buffer, uint8_t **data,
-                                    size_t size);
+size_t zephyrRingBufClaimPutting(ZephyrRingBuffer *buffer, uint8_t **data,
+                                 size_t size);
 
 /**
  * @brief   Signal that the putting operation is done. This needs to be called
