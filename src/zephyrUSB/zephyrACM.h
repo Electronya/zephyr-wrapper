@@ -125,6 +125,26 @@ int zephyrAcmIrqUpdate(ZephyrACM *acm);
 int zephyrAcmIsIrqPending(ZephyrACM *acm);
 
 /**
+ * @brief   Check if there is data in the Rx FIFO.
+ *
+ * @param acm   The ACM device.
+ *
+ * @return  1 if there is data in the FIFO, 0 if the FIFO is empty, the error
+ *          error code otherwise.
+ */
+int zephyrAcmIsRxIrqReady(ZephyrACM *acm);
+
+/**
+ * @brief   Check if the Tx FIFO is ready to be written in.
+ *
+ * @param acm   The ACM device.
+ *
+ * @return  1 if the FIFO is ready t be written in, 0 if the FIFO is full, the
+ *          error code otherwise.
+ */
+int zephyrAcmIsTxIrqREady(ZephyrACM *acm);
+
+/**
  * @brief   Read from the Rx fifo.
  *
  * @param acm   The ACM device.

@@ -98,6 +98,16 @@ int zephyrAcmIsIrqPending(ZephyrACM *acm)
   return uart_irq_is_pending(acm->dev);
 }
 
+int zephyrAcmIsRxIrqReady(ZephyrACM *acm)
+{
+  return uart_irq_rx_ready(acm->dev);
+}
+
+int zephyrAcmIsTxIrqREady(ZephyrACM *acm)
+{
+  return uart_irq_tx_ready(acm->dev);
+}
+
 int zephyrAcmReadFifo(ZephyrACM *acm)
 {
   int rc;
