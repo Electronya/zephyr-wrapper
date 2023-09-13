@@ -142,7 +142,7 @@ int zephyrAcmIsRxIrqReady(ZephyrACM *acm);
  * @return  1 if the FIFO is ready t be written in, 0 if the FIFO is full, the
  *          error code otherwise.
  */
-int zephyrAcmIsTxIrqREady(ZephyrACM *acm);
+int zephyrAcmIsTxIrqReady(ZephyrACM *acm);
 
 /**
  * @brief   Read from the Rx fifo.

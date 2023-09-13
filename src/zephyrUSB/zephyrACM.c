@@ -103,7 +103,7 @@ int zephyrAcmIsRxIrqReady(ZephyrACM *acm)
   return uart_irq_rx_ready(acm->dev);
 }
 
-int zephyrAcmIsTxIrqREady(ZephyrACM *acm)
+int zephyrAcmIsTxIrqReady(ZephyrACM *acm)
 {
   return uart_irq_tx_ready(acm->dev);
 }
