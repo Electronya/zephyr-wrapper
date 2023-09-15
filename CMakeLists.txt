@@ -6,6 +6,7 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
     ./src/zephyrCommon/
     ./src/zephyrRingBuffer/
     ./src/zephyrThread/
+    ./src/zephyrWorkQueue/
   )
   zephyr_library()
 
@@ -15,6 +16,8 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
       ./src/zephyrCommon/zephyrCommon.c
       ./src/zephyrRingBuffer/zephyrRingBuffer.c
       ./src/zephyrThread/zephyrThread.c
+      ./src/zephyrWorkQueue/zephyrWork.c
+      ./src/zephyrWorkQueue/zephyrWorkQueue.c
     )
   endif()
 
