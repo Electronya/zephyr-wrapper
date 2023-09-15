@@ -17,6 +17,8 @@
 
 #include <zephyr/kernel.h>
 
+#include "zephyrWorkQueue.h"
+
 /**
  * @brief The work data structure.
 */

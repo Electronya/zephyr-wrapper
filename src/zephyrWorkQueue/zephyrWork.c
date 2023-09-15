@@ -17,7 +17,6 @@
 
 #include "zephyrWork.h"
 #include "zephyrCommon.h"
-#include "zephyrWorkQueue.h"
 
 LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
