@@ -61,7 +61,7 @@ bool zephyrWorkCancelSync(ZephyrWork *work)
 
 void zephyrDelayedWorkInit(ZephyrDelayedWork *work)
 {
-  k_work_init_delayable(&work->data);
+  k_work_init_delayable(&work->data, work->handler);
 }
 
 int zephyrDelayedWorkGetBusy(ZephyrDelayedWork *work)
