@@ -4,7 +4,9 @@
 if(CONFIG_ENYA_ZEPHYR_WRAPPER)
   zephyr_include_directories(
     ./src/zephyrCommon/
+    ./src/zephyrRingBuffer/
     ./src/zephyrThread/
+    ./src/zephyrWorkQueue/
   )
   zephyr_library()
 
@@ -12,7 +14,10 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
   if(NOT DEFINED CONFIG_ZTEST)
     zephyr_library_sources(
       ./src/zephyrCommon/zephyrCommon.c
+      ./src/zephyrRingBuffer/zephyrRingBuffer.c
       ./src/zephyrThread/zephyrThread.c
+      ./src/zephyrWorkQueue/zephyrWork.c
+      ./src/zephyrWorkQueue/zephyrWorkQueue.c
     )
   endif()
 
@@ -38,5 +43,17 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
     if(NOT DEFINED CONFIG_ZTEST)
       zephyr_library_sources(./src/zephyrLedStrip/zephyrLedStrip.c)
     endif()
+  endif()
+endif()
+
+# USB stuff.
+if(CONFIG_ENYA_USB)
+  zephyr_include_directories(./src/zephyrUSB/)
+  if(NOT DEFINED CONFIG_ZTEST)
+    zephyr_library_sources(./src/zephyrUSB/zephyrUSB.c)
+  endif()
+  # USB CDC ACM
+  if(CONFIG_ENYA_USB_ACM AND NOT DEFINED CONFIG_ZTEST)
+    zephyr_library_sources(./src/zephyrUSB/zephyrACM.c)
   endif()
 endif()

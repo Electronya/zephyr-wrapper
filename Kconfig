@@ -27,3 +27,18 @@ config ENYA_LED_STRIP
         depends on ENYA_ZEPHYR_WRAPPER && ENYA_GPIO && ENYA_COUNTER
         help
             Enable the LED strip wrapper.
+
+config ENYA_USB
+        bool "USB wrapper"
+        default n
+        depends on ENYA_ZEPHYR_WRAPPER
+        help
+            Enable the USB wrapper. IMPORTANT: This has USB_DEVICE_STACK as a
+            dependencies, but it's in the depends on for testing purpose.
+
+config ENYA_USB_ACM
+        bool "USB ACM wrapper"
+        default n
+        depends on ENYA_USB
+        help
+            Enable the USB CDC ACM wrapper.
