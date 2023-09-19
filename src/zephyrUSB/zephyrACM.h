@@ -25,7 +25,7 @@
 */
 typedef struct
 {
-  const struct device *dev;                       /**< The ACM device. */
+  const struct device *dev;                 /**< The ACM device. */
   struct ring_buf rxRingBuf;                /**< The ACM Rx ring buffer. */
   uint8_t *rxBuffer;                        /**< The ACM Rx buffer. */
   struct ring_buf txRingBuf;                /**< The ACM Tx ring buffer. */
