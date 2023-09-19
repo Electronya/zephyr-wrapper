@@ -17,6 +17,7 @@
 
 #include <zephyr/device.h>
 #include <zephyr/kernel.h>
+#include <zephyr/usb/class/usb_hid.h>
 
 /**
  * @brief The HID device data structure.
