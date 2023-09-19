@@ -14,7 +14,6 @@
 
 #include <zephyr/logging/log.h>
 #include <zephyr/sys/util.h>
-#include <zephyr/usb/usb_device.h>
 
 #include "zephyrHID.h"
 #include "zephyrCommon.h"
