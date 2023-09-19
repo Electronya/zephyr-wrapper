@@ -56,4 +56,8 @@ if(CONFIG_ENYA_USB)
   if(CONFIG_ENYA_USB_ACM AND NOT DEFINED CONFIG_ZTEST)
     zephyr_library_sources(./src/zephyrUSB/zephyrACM.c)
   endif()
+  # USB HID
+  if(CONFIG_ENYA_USB_HID AND NOT DEFINED CONFIG_ZTEST)
+  zephyr_library_sources(./src/zephyrUSB/zephyrHID.c)
+  endif()
 endif()
