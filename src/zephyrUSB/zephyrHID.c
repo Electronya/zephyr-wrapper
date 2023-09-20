@@ -42,13 +42,13 @@ int zephyrHidInit(ZephyrHID *hid, uint8_t *devLabel)
 }
 
 int zephyrHidWriteToEp(ZephyrHID *hid, uint8_t *data, size_t size,
-                       uint8_t *byteCnt)
+                       size_t *byteCnt)
 {
   return hid_int_ep_write(hid->dev, data, size, byteCnt);
 }
 
 int zephyrHidReadFromEp(ZephyrHID *hid, uint8_t *data, size_t size,
-                        uint8_t *byteCnt)
+                        size_t *byteCnt)
 {
   return hid_int_ep_read(hid->dev, data, size, byteCnt);
 }

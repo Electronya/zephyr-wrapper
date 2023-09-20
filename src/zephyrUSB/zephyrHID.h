@@ -52,7 +52,7 @@ int zephyrHidInit(ZephyrHID *hid, uint8_t *devLabel);
  * @return  0 if successful, the error code otherwise.
  */
 int zephyrHidWriteToEp(ZephyrHID *hid, uint8_t *data, size_t size,
-                       uint8_t *byteCnt);
+                       size_t *byteCnt);
 
 /**
  * @brief   Read from the EP buffer.
@@ -65,7 +65,7 @@ int zephyrHidWriteToEp(ZephyrHID *hid, uint8_t *data, size_t size,
  * @return  0 if successful, the error code otherwise.
  */
 int zephyrHidReadFromEp(ZephyrHID *hid, uint8_t *data, size_t size,
-                        uint8_t *byteCnt);
+                        size_t *byteCnt);
 
 #endif    /* USB_HID_WRAPPER */
 
