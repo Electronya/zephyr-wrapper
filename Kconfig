@@ -42,3 +42,10 @@ config ENYA_USB_ACM
         depends on ENYA_USB
         help
             Enable the USB CDC ACM wrapper.
+
+config ENYA_USB_HID
+        bool "USB HID wrapper"
+        default n
+        depends on ENYA_USB
+        help
+          Enable the USB HID wrapper.
