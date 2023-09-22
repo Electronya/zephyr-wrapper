@@ -99,7 +99,7 @@ int zephyrAdcGetSample(ZephyrAdcChanId id, uint32_t *sample)
   adcCtrlData.seq.channels = BIT(id);
   adcCtrlData.seq.buffer = (void *)sample;
 
-  rc = adc_read(adcCtrlData.adc, adcCtrlData.seq);
+  rc = adc_read(adcCtrlData.adc, &adcCtrlData.seq);
   if(rc < 0)
   {
     LOG_ERR("unable to sample ADC channel %d: %d", id, rc);
