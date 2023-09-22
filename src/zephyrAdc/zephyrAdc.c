@@ -18,7 +18,7 @@
 #include "zephyrAdc.h"
 #include "zephyrCommon.h"
 
-LOG_MODULE_REGISTER(ZEPHYR_WRAPPER_MODULE_NAME);
+LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
 typedef struct adcCtrlData
 {
