@@ -43,7 +43,6 @@ typedef enum
   ADC_VREF,                         /**< The Vref ADC channel*/
   ADC_MAX_CHAN_CNT,                 /**< The ADC maximal channel count. */
 } ZephyrAdcChanId;
-#endif    /* ZEPHYR_ADC_WRAPPER */
 
 /**
  * @brief ADC channel gains.
@@ -126,5 +125,7 @@ int zephyrAdcInit(ZephyrAdcChanConfig *configs, size_t chanCount,
  * @return  0 fi successful, the error code otherwise.
  */
 int zephyrAdcGetSample(ZephyrAdcChanId id, uint32_t *sample);
+
+#endif    /* ZEPHYR_ADC_WRAPPER */
 
 /** @} */
