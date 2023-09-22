@@ -64,7 +64,7 @@ typedef enum
 	ADC_VDD_1_4_REF = ADC_REF_VDD_1_4,      /**< VDD/4. */
   ADC_INT_REF = ADC_REF_INTERNAL,         /**< The ADC channel internal reference. */
   ADC_EXT0_REF = ADC_REF_EXTERNAL0,       /**< External, input 0. */
-	ADC_EXT0_REF = ADC_REF_EXTERNAL1,       /**< External, input 1. */
+	ADC_EXT1_REF = ADC_REF_EXTERNAL1,       /**< External, input 1. */
 } ZephyrAdcChanRef;
 
 /**
