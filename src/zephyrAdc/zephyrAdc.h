@@ -119,12 +119,12 @@ int zephyrAdcInit(ZephyrAdcChanConfig *configs, size_t chanCount,
 /**
  * @brief   Get an ADC sample from the specified channel.
  *
- * @param id          The ADC channel ID.
+ * @param configIdx   The ADC channel configuration index.
  * @param sample      The sample.
  *
  * @return  0 fi successful, the error code otherwise.
  */
-int zephyrAdcGetSample(ZephyrAdcChanId id, uint32_t *sample);
+int zephyrAdcGetSample(uint32_t configIdx, uint32_t *sample);
 
 #endif    /* ZEPHYR_ADC_WRAPPER */
 

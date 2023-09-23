@@ -92,24 +92,29 @@ int zephyrAdcInit(ZephyrAdcChanConfig *configs, size_t chanCount,
   return rc;
 }
 
-int zephyrAdcGetSample(ZephyrAdcChanId id, uint32_t *sample)
+int zephyrAdcGetSample(uint32_t configIdx, uint32_t *sample)
 {
   int rc;
 
-  adcCtrlData.seq.channels = BIT(id);
+  if(configIdx > adcCtrlData.chanUsedCnt || configIdx == 0)
+    return -EINVAL;
+
+  adcCtrlData.seq.channels = BIT(adcCtrlData.chanCfgs[configIdx].channel_id);
   adcCtrlData.seq.buffer = (void *)sample;
 
   rc = adc_read(adcCtrlData.adc, &adcCtrlData.seq);
   if(rc < 0)
   {
-    LOG_ERR("unable to sample ADC channel %d: %d", id, rc);
+    LOG_ERR("unable to sample ADC channel %d: %d",
+      adcCtrlData.chanCfgs[configIdx].channel_id, rc);
     return rc;
   }
 
-  rc = adc_raw_to_millivolts(adcCtrlData.vdd, adcCtrlData.chanCfgs[id].gain,
-    adcCtrlData.seq.resolution, sample);
+  rc = adc_raw_to_millivolts(adcCtrlData.vdd,
+    adcCtrlData.chanCfgs[configIdx].gain, adcCtrlData.seq.resolution, sample);
   if(rc < 0)
-    LOG_ERR("unable to convert ADC raw data to mV of channel %d: %d", id, rc);
+    LOG_ERR("unable to convert ADC raw data to mV of channel %d: %d",
+      adcCtrlData.chanCfgs[configIdx].channel_id, rc);
 
   return rc;
 }
