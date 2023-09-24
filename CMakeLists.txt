@@ -21,6 +21,14 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
     )
   endif()
 
+  # ADC wrapper.
+  if(CONFIG_ENYA_ADC)
+    zephyr_include_directories(./src/zephyrAdc/)
+    if(NOT DEFINED CONFIG_ZTEST)
+      zephyr_library_sources(./src/zephyrAdc/zephyrAdc.c)
+    endif()
+  endif()
+
   # GPIO wrapper.
   if(CONFIG_ENYA_GPIO)
     zephyr_include_directories(./src/zephyrGpio/)
