@@ -139,19 +139,20 @@ void counterCallback(const struct device *dev, void *userData)
   ZephyrLedStrip *strip = (ZephyrLedStrip *)userData;
 
   /* check if resetting */
-  if(strip->byteIdx == strip->pixelCount * strip->pixelSize)
-  {
-    if(processReset(strip))
-    {
-      rc = zephyrCounterStop(&strip->timingCntr);
-      if(rc < 0)
-        LOG_ERR("unable to stop the LED strip timer.");
-    }
-  }
-  else
-  {
-    transmitBit(strip);
-  }
+  zephyrGpioToggle(strip->dataLine);
+  // if(strip->byteIdx == strip->pixelCount * strip->pixelSize)
+  // {
+  //   if(processReset(strip))
+  //   {
+  //     rc = zephyrCounterStop(&strip->timingCntr);
+  //     if(rc < 0)
+  //       LOG_ERR("unable to stop the LED strip timer.");
+  //   }
+  // }
+  // else
+  // {
+  //   transmitBit(strip);
+  // }
 }
 
 /**
