@@ -139,7 +139,7 @@ void counterCallback(const struct device *dev, void *userData)
   ZephyrLedStrip *strip = (ZephyrLedStrip *)userData;
 
   /* check if resetting */
-  zephyrGpioToggle(strip->dataLine);
+  zephyrGpioToggle(&strip->dataLine);
   // if(strip->byteIdx == strip->pixelCount * strip->pixelSize)
   // {
   //   if(processReset(strip))
