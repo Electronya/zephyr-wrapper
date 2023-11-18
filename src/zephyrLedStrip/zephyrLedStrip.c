@@ -46,7 +46,7 @@ static void calculateTicks(ZephyrLedStrip *strip)
   ticks = (uint32_t)(tmpTiming / period);
 
   strip->tickPeriod = (uint32_t)(period * ticks);
-  strip->timingCntr.topConfig.ticks = ticks * 2;
+  strip->timingCntr.topConfig.ticks = 10;
 }
 
 /**
