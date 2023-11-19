@@ -27,8 +27,7 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, uint32_t pixelCnt)
   strip->rgbPixels = NULL;
 
   if(device_is_ready(strip->dev))
-    LOG_DBG("initializing strip %s with %d pixels of %d color format",
-      strip->dev->name, pixelCnt, colorFmt);
+    LOG_DBG("initializing strip %s with %d pixels", strip->dev->name, pixelCnt);
   else
   {
     LOG_ERR("strip device %s not ready", strip->dev->name);
