@@ -15,8 +15,9 @@
 #ifndef LED_STRIP_WRAPPER
 #define LED_STRIP_WRAPPER
 
-#include "zephyrCounter.h"
-#include "zephyrGpio.h"
+#include <zephyr/kernel.h>
+#include <zephyr/device.h>
+#include <zephyr/drivers/led_strip.h>
 
 /**
  * @brief   The RGB color sequence constructor.
@@ -24,72 +25,18 @@
 #define RGB(_r, _g, _b)         { .r = (_r), .g = (_g), .b = (_b) }
 
 /**
- * @brief   The RGBW color sequence constructor.
-*/
-#define RGBW(_r, _g, _b, _w)    { .r = (_r), .g = (_g), .b = (_b), .w = (_w) };
-
-/**
- * @brief   The pixel color format.
-*/
-typedef enum
-{
-  LED_STRIP_COLOR_RGB,              /**< The RGB color format. */
-  LED_STRIP_COLOR_GRB,              /**< The GRB color format. */
-  LED_STRIP_COLOR_RGBW,             /**< The RGBW color format. */
-  LED_STRIP_COLOR_CNT               /**< The number of color format. */
-} ZephyrLedStripClrFmt;
-
-/**
  * @brief   The RGB LED structure.
 */
-typedef struct
-{
-  uint8_t r;                        /** The red color component. */
-  uint8_t g;                        /** The green color component. */
-  uint8_t b;                        /** The blue color component. */
-} ZephyrRgbPixel;
-
-/**
- * @brief   The GRB LED structure.
-*/
-typedef struct
-{
-  uint8_t g;                        /** The green color component. */
-  uint8_t r;                        /** The red color component. */
-  uint8_t b;                        /** The blue color component. */
-} ZephyrGrbPixel;
-
-/**
- * @brief   The RGBW LED structure.
-*/
-typedef struct
-{
-  uint8_t r;                        /** The red color component. */
-  uint8_t g;                        /** The green color component. */
-  uint8_t b;                        /** The blue color component. */
-  uint8_t w;                        /** The white color component. */
-} ZephyrRgbwPixel;
+typedef struct led_rgb ZephyrRgbLed;
 
 /**
  * @brief   The LED strip data structure.
 */
 typedef struct
 {
-  ZephyrCounter timingCntr;         /**< The bit timing counter. */
-  uint32_t byteIdx;                 /**< The current Tx byte index. */
-  uint8_t bitIdx;                   /**< The bit index. */
-  uint32_t tickPeriod;              /**< The tick period (ns). */
-  uint32_t tickCntr;                /**< The tick counter. */
-  uint16_t t0h;                     /**< The 0 bit high timing value (ns).*/
-  uint16_t t0l;                     /**< The 0 bit low timing value (ns).*/
-  uint16_t t1h;                     /**< The 1 bit high timing value (ns). */
-  uint16_t t1l;                     /**< The 1 bit low timing value (ns). */
-  uint32_t rst;                     /**< The reset timing value (ns). */
-  ZephyrGpio dataLine;              /**< The data line. */
+  const struct device *dev;         /**< The Zephyr device of the led strip. */
   uint32_t pixelCount;              /**< The pixel count in the led strip. */
-  ZephyrLedStripClrFmt colorFmt;    /**< The pixel color format. */
-  size_t pixelSize;                 /**< The pixel size. */
-  void *pixels;                     /**< The array of pixel of the strip. */
+  ZephyrRgbLed *rgbPixels;          /**< The array of RGB pixel of the strip. */
 } ZephyrLedStrip;
 
 /**
@@ -101,8 +48,7 @@ typedef struct
  *
  * @return          0 if successful, the error code otherwise.
  */
-int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
-                       const uint32_t pixelCnt);
+int zephyrLedStripInit(ZephyrLedStrip *strip, const uint32_t pixelCnt);
 
 /**
  * @brief   Get the pixel count of the LED strip.
@@ -113,79 +59,29 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, ZephyrLedStripClrFmt colorFmt,
 uint32_t zephyrLedStripGetPixelCnt(ZephyrLedStrip *strip);
 
 /**
- * @brief   Set the desired RGB pixel.
+ * @brief   Set the desired pixel RGB color.
  *
  * @param strip     The LED strip data structure to set.
  * @param pixelIdx  The index of the pixel to set the color.
- * @param pixel     The pixel new RGB color.
+ * @param rgbPixel  The pixel new RGB color.
  *
  * @return          0 if successful, the error code otherwise.
 */
-int zephyrLedStripSetRgbPixel(ZephyrLedStrip *strip, uint32_t pixelIdx,
-                              const ZephyrRgbPixel *pixel);
+int zephyrLedStripSetPixel(ZephyrLedStrip *strip, uint32_t pixelIdx,
+                           const ZephyrRgbLed *rgbPixel);
 
 /**
- * @brief   Set the RGB pixels included between the start and end.
+ * @brief   Set the pixels included between the start and
  *
  * @param strip     The LED strip data structure to set.
  * @param start     The index of the starting pixel.
  * @param end       The index of the ending pixel.
- * @param pixels    The pixels new RGB color.
+ * @param rgbPixels The pixels new RGB color.
  *
  * @return          0 if successful, the error code otherwise.
  */
-int zephyrLedStripSetRgbPixels(ZephyrLedStrip *strip, uint32_t start,
-                               uint32_t end, const ZephyrRgbPixel *pixels);
-
-/**
- * @brief   Set the desired GRB pixel.
- *
- * @param strip     The LED strip data structure to set.
- * @param pixelIdx  The index of the pixel to set the color.
- * @param pixel     The pixel new GRB color.
- *
- * @return          0 if successful, the error code otherwise.
-*/
-int zephyrLedStripSetGrbPixel(ZephyrLedStrip *strip, uint32_t pixelIdx,
-                              const ZephyrGrbPixel *pixel);
-
-/**
- * @brief   Set the GRB pixels included between the start and end.
- *
- * @param strip     The LED strip data structure to set.
- * @param start     The index of the starting pixel.
- * @param end       The index of the ending pixel.
- * @param pixels    The pixels new GRB color.
- *
- * @return          0 if successful, the error code otherwise.
- */
-int zephyrLedStripSetGrbPixels(ZephyrLedStrip *strip, uint32_t start,
-                               uint32_t end, const ZephyrGrbPixel *pixels);
-
-/**
- * @brief   Set the desired RGBW pixel.
- *
- * @param strip     The LED strip data structure to set.
- * @param pixelIdx  The index of the pixel to set the color.
- * @param pixel     The pixel new RGBW color.
- *
- * @return          0 if successful, the error code otherwise.
-*/
-int zephyrLedStripSetRgbwPixel(ZephyrLedStrip *strip, uint32_t pixelIdx,
-                               const ZephyrRgbwPixel *pixel);
-
-/**
- * @brief   Set the RGBW pixels included between the start and end.
- *
- * @param strip     The LED strip data structure to set.
- * @param start     The index of the starting pixel.
- * @param end       The index of the ending pixel.
- * @param pixels    The pixels new RGBW color.
- *
- * @return          0 if successful, the error code otherwise.
- */
-int zephyrLedStripSetRgbwPixels(ZephyrLedStrip *strip, uint32_t start,
-                                uint32_t end, const ZephyrRgbwPixel *pixels);
+int zephyrLedStripSetPixels(ZephyrLedStrip *strip, uint32_t start,
+                            uint32_t end, const ZephyrRgbLed *rgbPixels);
 
 /**
  * @brief   Update the strip pixels.
