@@ -67,8 +67,8 @@ uint32_t zephyrLedStripGetPixelCnt(ZephyrLedStrip *strip);
  *
  * @return          0 if successful, the error code otherwise.
 */
-int zephyrLedStripSetPixelRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
-                                   const ZephyrRgbLed *rgbPixel);
+int zephyrLedStripSetRgbPixel(ZephyrLedStrip *strip, uint32_t pixelIdx,
+                              const ZephyrRgbLed *rgbPixel);
 
 /**
  * @brief   Set the pixels included between the start and
@@ -80,8 +80,8 @@ int zephyrLedStripSetPixelRgbColor(ZephyrLedStrip *strip, uint32_t pixelIdx,
  *
  * @return          0 if successful, the error code otherwise.
  */
-int zephyrLedStripSetPixelsRgbColor(ZephyrLedStrip *strip, uint32_t start,
-                                    uint32_t end, const ZephyrRgbLed *rgbPixels);
+int zephyrLedStripSetRgbPixels(ZephyrLedStrip *strip, uint32_t start,
+                               uint32_t end, const ZephyrRgbLed *rgbPixels);
 
 /**
  * @brief   Update the strip pixels.
