@@ -53,7 +53,7 @@ uint32_t zephyrLedStripGetPixelCnt(ZephyrLedStrip *strip)
 }
 
 int zephyrLedStripSetPixel(ZephyrLedStrip *strip, uint32_t pixelIdx,
-                              const ZephyrRgbLed *rgbPixel)
+                           const ZephyrRgbLed *rgbPixel)
 {
   if(!strip->dev || !strip->rgbPixels)
   {
@@ -75,7 +75,7 @@ int zephyrLedStripSetPixel(ZephyrLedStrip *strip, uint32_t pixelIdx,
 }
 
 int zephyrLedStripSetPixels(ZephyrLedStrip *strip, uint32_t start,
-                               uint32_t end, const ZephyrRgbLed *rgbPixels)
+                            uint32_t end, const ZephyrRgbLed *rgbPixels)
 {
   uint32_t pixelCount;
 
