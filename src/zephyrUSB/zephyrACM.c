@@ -56,6 +56,49 @@ int zephyrAcmInit(ZephyrACM *acm, size_t rxBufSize, size_t txBufsize)
   return rc;
 }
 
+int zephyrAcmStart(ZephyrACM *acm)
+{
+  int rc;
+  uint32_t dtr = 0;
+  uint32_t baudrate;
+
+  /* wait for DTR assertion */
+  while(1)
+  {
+    uart_line_ctrl_get(acm->dev, UART_LINE_CTRL_DTR, &dtr);
+		if(dtr)
+			break;
+
+		k_sleep(K_MSEC(100));
+  }
+
+  /* They are optional, we use them to test the interrupt endpoint */
+	rc = uart_line_ctrl_set(acm->dev, UART_LINE_CTRL_DCD, 1);
+	if(rc < 0)
+		LOG_DBG("Failed to set DCD, rc code %d", rc);
+
+  rc = uart_line_ctrl_set(acm->dev, UART_LINE_CTRL_DSR, 1);
+	if(rc < 0)
+		LOG_DBG("Failed to set DSR, rc code %d", rc);
+
+	/* wait 1 sec for the host to do all settings */
+	k_busy_wait(1000000);
+
+	rc = uart_line_ctrl_get(acm->dev, UART_LINE_CTRL_BAUD_RATE, &baudrate);
+	if(rc)
+		LOG_DBG("Failed to get baudrate, rc code %d", rc);
+	else
+		LOG_DBG("Baudrate detected: %d", baudrate);
+
+  rc = uart_irq_callback_set(acm->dev, acm->cb);
+  if(rc < 0)
+    LOG_ERR("unable to set the IRQ callback");
+
+  uart_irq_rx_enable(acm->dev);
+
+  return rc;
+}
+
 int zephyrAcmGetCtrlLine(ZephyrACM *acm, ZephyrAcmCtrlLine ctrlLine,
                          uint32_t *lineVal)
 {

@@ -57,6 +57,15 @@ typedef enum
 int zephyrAcmInit(ZephyrACM *acm, size_t rxBufSize, size_t txBufsize);
 
 /**
+ * @brief   Start the ACM device.
+ *
+ * @param acm       The ACM device.
+ *
+ * @return  0 if successful, the error code otherwise.
+ */
+int zephyrAcmStart(ZephyrACM *acm);
+
+/**
  * @brief   Get the state of a control line.
  *
  * @param acm       The ACM device.
