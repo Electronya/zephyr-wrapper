@@ -70,22 +70,22 @@ int zephyrAcmSetCtrlLine(ZephyrACM *acm, ZephyrAcmCtrlLine ctrlLine,
 
 void zephyrAcmEnableTxIrq(ZephyrACM *acm)
 {
-  uart_irq_rx_enable(acm->dev);
+  uart_irq_tx_enable(acm->dev);
 }
 
 void zephyrAcmDisableTxIrq(ZephyrACM *acm)
 {
-  uart_irq_rx_disable(acm->dev);
+  uart_irq_tx_disable(acm->dev);
 }
 
 void zephyrAcmEnableRxIrq(ZephyrACM *acm)
 {
-  uart_irq_tx_enable(acm->dev);
+  uart_irq_rx_enable(acm->dev);
 }
 
 void zephyrAcmDisableRxIrq(ZephyrACM *acm)
 {
-  uart_irq_tx_disable(acm->dev);
+  uart_irq_rx_disable(acm->dev);
 }
 
 int zephyrAcmIrqUpdate(ZephyrACM *acm)
