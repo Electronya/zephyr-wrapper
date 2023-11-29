@@ -22,7 +22,7 @@
 /**
  * Zephyr message queue data structure.
  */
-typedef struct zephyrMsgQueue
+typedef struct
 {
   struct k_msgq msgq;               /**< The zephyr message queue structure. */
   char *buffer;                     /**< The message queue buffer. */
