@@ -37,8 +37,7 @@ typedef struct zephyrMsgQueue
  *
  * @return              0 if successful, the error code otherwise.
  */
-int zephyrMsgQueueInit(ZephyrMsgQueue *queue, size_t msgSize,
-                       uint32_t maxMsgCount);
+int zephyrMsgQueueInit(ZephyrMsgQueue *queue, size_t msgSize, size_t maxMsgCnt);
 
 /**
  * @brief   Push a message to a queue.

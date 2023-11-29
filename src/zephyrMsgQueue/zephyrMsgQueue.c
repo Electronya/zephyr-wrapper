@@ -19,14 +19,13 @@
 
 LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
-int zephyrMsgQueueInit(ZephyrMsgQueue *queue, size_t msgSize,
-                       uint32_t maxMsgCount)
+int zephyrMsgQueueInit(ZephyrMsgQueue *queue, size_t msgSize, size_t maxMsgCnt)
 {
-  queue->buffer = k_malloc(msgSize * maxMsgCount);
+  queue->buffer = k_malloc(msgSize * maxMsgCnt);
   if(!queue->buffer)
     return -ENOSPC;
 
-  k_msgq_init(&queue->msgq, queue->buffer, msgSize, maxMsgCount);
+  k_msgq_init(&queue->msgq, queue->buffer, msgSize, maxMsgCnt);
 
   return 0;
 }
