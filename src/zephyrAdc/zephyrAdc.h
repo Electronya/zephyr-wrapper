@@ -42,7 +42,7 @@ typedef enum
   ADC_DIE_TEMP,                     /**< The die temperature ADC channel. */
   ADC_VREF,                         /**< The Vref ADC channel*/
   ADC_MAX_CHAN_CNT,                 /**< The ADC maximal channel count. */
-} ZephyrAdcChanId;
+} ZephyrAdcChanId_t;
 
 /**
  * @brief ADC channel gains.
@@ -50,7 +50,7 @@ typedef enum
 typedef enum
 {
   ADC_UNIT_GAIN = ADC_GAIN_1,       /**< The ADC 0 gain level. */
-} ZephyrAdcChanGain;
+} ZephyrAdcChanGain_t;
 
 /**
  * @brief ADC channel reference.
@@ -64,7 +64,7 @@ typedef enum
   ADC_INT_REF = ADC_REF_INTERNAL,         /**< The ADC channel internal reference. */
   ADC_EXT0_REF = ADC_REF_EXTERNAL0,       /**< External, input 0. */
 	ADC_EXT1_REF = ADC_REF_EXTERNAL1,       /**< External, input 1. */
-} ZephyrAdcChanRef;
+} ZephyrAdcChanRef_t;
 
 /**
  * @brief ADC channel acquisition time.
@@ -79,7 +79,7 @@ typedef enum
   ADC_ACQ_56_CYCLES = 56,           /**< The ADC channel 56 cycles acquisition time. */
   ADC_ACQ_72_CYCLES = 72,           /**< The ADC channel 72 cycles acquisition time. */
   ADC_ACQ_240_CYCLES = 240,         /**< The ADC channel 240 cycles acquisition time. */
-} ZephyrAdcChanAcqTime;
+} ZephyrAdcChanAcqTime_t;
 
 /**
  * @brief ADC resolution.
@@ -90,18 +90,18 @@ typedef enum
   ADC_8BITS_RES = 8,                /**< The ADC 8 bits resolution. */
   ADC_10BITS_RES = 10,              /**< The ADC 10 bits resolution. */
   ADC_12BITS_RES = 12,              /**< The ADC 12 bits resolution. */
-} ZephyrAdcRes;
+} ZephyrAdcRes_t;
 
 /**
  * @brief ADC channel configuration.
  */
-typedef struct adcChanConfig
+typedef struct
 {
-  ZephyrAdcChanId id;               /**< The ADC channel ID. */
-  ZephyrAdcChanGain gain;           /**< The ADC channel gain. */
-  ZephyrAdcChanRef ref;             /**< The ADC channel reference. */
-  ZephyrAdcChanAcqTime acqTime;     /**< The ADC channel acquisition time. */
-} ZephyrAdcChanConfig;
+  ZephyrAdcChanId_t id;               /**< The ADC channel ID. */
+  ZephyrAdcChanGain_t gain;           /**< The ADC channel gain. */
+  ZephyrAdcChanRef_t ref;             /**< The ADC channel reference. */
+  ZephyrAdcChanAcqTime_t acqTime;     /**< The ADC channel acquisition time. */
+} ZephyrAdcChanConfig_t;
 
 /**
  * @brief   Initialize the ADC.
@@ -113,8 +113,8 @@ typedef struct adcChanConfig
  *
  * @return  0 if successful, the error code otherwise.
  */
-int zephyrAdcInit(ZephyrAdcChanConfig *configs, size_t chanCount,
-                  ZephyrAdcRes res, uint32_t vdd);
+int zephyrAdcInit(ZephyrAdcChanConfig_t *configs, size_t chanCount,
+                  ZephyrAdcRes_t res, uint32_t vdd);
 
 /**
  * @brief   Get an ADC sample from the specified channel.

@@ -22,7 +22,7 @@
 
 LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
-int zephyrLedStripInit(ZephyrLedStrip *strip, uint32_t pixelCnt)
+int zephyrLedStripInit(ZephyrLedStrip_t *strip, uint32_t pixelCnt)
 {
   strip->rgbPixels = NULL;
 
@@ -34,26 +34,26 @@ int zephyrLedStripInit(ZephyrLedStrip *strip, uint32_t pixelCnt)
     return -ENODEV;
   }
 
-  strip->rgbPixels = k_malloc(pixelCnt * sizeof(ZephyrRgbLed));
+  strip->rgbPixels = k_malloc(pixelCnt * sizeof(ZephyrRgbLed_t));
   if(!strip->rgbPixels)
   {
     LOG_ERR("unable to allocate memory for %d X RGB pixel", pixelCnt);
     return -ENOSPC;
   }
-  memset(strip->rgbPixels, 0x00, pixelCnt * sizeof(ZephyrRgbLed));
+  memset(strip->rgbPixels, 0x00, pixelCnt * sizeof(ZephyrRgbLed_t));
 
   strip->pixelCount = pixelCnt;
 
   return 0;
 }
 
-uint32_t zephyrLedStripGetPixelCnt(ZephyrLedStrip *strip)
+uint32_t zephyrLedStripGetPixelCnt(ZephyrLedStrip_t *strip)
 {
   return strip->pixelCount;
 }
 
-int zephyrLedStripSetPixel(ZephyrLedStrip *strip, uint32_t pixelIdx,
-                           const ZephyrRgbLed *rgbPixel)
+int zephyrLedStripSetPixel(ZephyrLedStrip_t *strip, uint32_t pixelIdx,
+                           const ZephyrRgbLed_t *rgbPixel)
 {
   if(!strip->dev || !strip->rgbPixels)
   {
@@ -68,14 +68,14 @@ int zephyrLedStripSetPixel(ZephyrLedStrip *strip, uint32_t pixelIdx,
     return -EDOM;
   }
 
-  memset(strip->rgbPixels + pixelIdx, 0x00, sizeof(ZephyrRgbLed));
-  memcpy(strip->rgbPixels + pixelIdx, rgbPixel, sizeof(ZephyrRgbLed));
+  memset(strip->rgbPixels + pixelIdx, 0x00, sizeof(ZephyrRgbLed_t));
+  memcpy(strip->rgbPixels + pixelIdx, rgbPixel, sizeof(ZephyrRgbLed_t));
 
   return 0;
 }
 
-int zephyrLedStripSetPixels(ZephyrLedStrip *strip, uint32_t start,
-                            uint32_t end, const ZephyrRgbLed *rgbPixels)
+int zephyrLedStripSetPixels(ZephyrLedStrip_t *strip, uint32_t start,
+                            uint32_t end, const ZephyrRgbLed_t *rgbPixels)
 {
   uint32_t pixelCount;
 
@@ -107,14 +107,14 @@ int zephyrLedStripSetPixels(ZephyrLedStrip *strip, uint32_t start,
   }
 
   pixelCount = end - start;
-  memset(strip->rgbPixels + start, 0x00, pixelCount * sizeof(ZephyrRgbLed));
+  memset(strip->rgbPixels + start, 0x00, pixelCount * sizeof(ZephyrRgbLed_t));
   memcpy(strip->rgbPixels + start, rgbPixels,
-    pixelCount * sizeof(ZephyrRgbLed));
+    pixelCount * sizeof(ZephyrRgbLed_t));
 
   return 0;
 }
 
-int zephyrLedStripUpdate(ZephyrLedStrip *strip)
+int zephyrLedStripUpdate(ZephyrLedStrip_t *strip)
 {
   int rc;
 

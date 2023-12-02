@@ -31,7 +31,7 @@ typedef struct
   struct ring_buf txRingBuf;                /**< The ACM Tx ring buffer. */
   uint8_t *txBuffer;                        /**< The ACM Tx buffer. */
   uart_irq_callback_user_data_t cb;         /**< The ACM interrupt callback. */
-} ZephyrACM;
+} ZephyrACM_t;
 
 /**
  * @brief   The ACM control lines.
@@ -43,7 +43,7 @@ typedef enum
   ACM_DTR = UART_LINE_CTRL_DTR,               /**< The ACM DTR control line. */
   ACM_DCD = UART_LINE_CTRL_DCD,               /**< The ACM DCD control line. */
   ACM_DSR = UART_LINE_CTRL_DSR,               /**< The ACM DSR control line. */
-} ZephyrAcmCtrlLine;
+} ZephyrAcmCtrlLine_t;
 
 /**
  * @brief   Initialize the ACM.
@@ -54,7 +54,7 @@ typedef enum
  *
  * @return  0 if successful, the error code otherwise.
  */
-int zephyrAcmInit(ZephyrACM *acm, size_t rxBufSize, size_t txBufsize);
+int zephyrAcmInit(ZephyrACM_t *acm, size_t rxBufSize, size_t txBufsize);
 
 /**
  * @brief   Get the state of a control line.
@@ -64,7 +64,7 @@ int zephyrAcmInit(ZephyrACM *acm, size_t rxBufSize, size_t txBufsize);
  * @param lineVal   the returned line value.
  * @return  0 if successful, the error code otherwise.
  */
-int zephyrAcmGetCtrlLine(ZephyrACM *acm, ZephyrAcmCtrlLine ctrlLine,
+int zephyrAcmGetCtrlLine(ZephyrACM_t *acm, ZephyrAcmCtrlLine_t ctrlLine,
                          uint32_t *lineVal);
 
 /**
@@ -75,7 +75,7 @@ int zephyrAcmGetCtrlLine(ZephyrACM *acm, ZephyrAcmCtrlLine ctrlLine,
  * @param lineVal   the line value.
  * @return  0 if successful, the error code otherwise.
  */
-int zephyrAcmSetCtrlLine(ZephyrACM *acm, ZephyrAcmCtrlLine ctrlLine,
+int zephyrAcmSetCtrlLine(ZephyrACM_t *acm, ZephyrAcmCtrlLine_t ctrlLine,
                          uint32_t lineVal);
 
 /**
@@ -83,28 +83,28 @@ int zephyrAcmSetCtrlLine(ZephyrACM *acm, ZephyrAcmCtrlLine ctrlLine,
  *
  * @param acm   The ACM device.
  */
-void zephyrAcmEnableTxIrq(ZephyrACM *acm);
+void zephyrAcmEnableTxIrq(ZephyrACM_t *acm);
 
 /**
  * @brief   Disable the Tx interrupt.
  *
  * @param acm   The ACM device.
  */
-void zephyrAcmDisableTxIrq(ZephyrACM *acm);
+void zephyrAcmDisableTxIrq(ZephyrACM_t *acm);
 
 /**
  * @brief   Enable the Rx interrupt.
  *
  * @param acm   The ACM device.
  */
-void zephyrAcmEnableRxIrq(ZephyrACM *acm);
+void zephyrAcmEnableRxIrq(ZephyrACM_t *acm);
 
 /**
  * @brief   Disable the Rx interrupt.
  *
  * @param acm   The ACM device.
  */
-void zephyrAcmDisableRxIrq(ZephyrACM *acm);
+void zephyrAcmDisableRxIrq(ZephyrACM_t *acm);
 
 /**
  * @brief   Start processing ACM interrupt.
@@ -113,7 +113,7 @@ void zephyrAcmDisableRxIrq(ZephyrACM *acm);
  *
  * @return  1 if successful, the error code otherwise.
  */
-int zephyrAcmIrqUpdate(ZephyrACM *acm);
+int zephyrAcmIrqUpdate(ZephyrACM_t *acm);
 
 /**
  * @brief   Check if their is an IRQ pending.
@@ -122,7 +122,7 @@ int zephyrAcmIrqUpdate(ZephyrACM *acm);
  *
  * @return  1 if an IRQ is pending, the error code otherwise.
  */
-int zephyrAcmIsIrqPending(ZephyrACM *acm);
+int zephyrAcmIsIrqPending(ZephyrACM_t *acm);
 
 /**
  * @brief   Check if there is data in the Rx FIFO.
@@ -132,7 +132,7 @@ int zephyrAcmIsIrqPending(ZephyrACM *acm);
  * @return  1 if there is data in the FIFO, 0 if the FIFO is empty, the error
  *          error code otherwise.
  */
-int zephyrAcmIsRxIrqReady(ZephyrACM *acm);
+int zephyrAcmIsRxIrqReady(ZephyrACM_t *acm);
 
 /**
  * @brief   Check if the Tx FIFO is ready to be written in.
@@ -142,7 +142,7 @@ int zephyrAcmIsRxIrqReady(ZephyrACM *acm);
  * @return  1 if the FIFO is ready t be written in, 0 if the FIFO is full, the
  *          error code otherwise.
  */
-int zephyrAcmIsTxIrqReady(ZephyrACM *acm);
+int zephyrAcmIsTxIrqReady(ZephyrACM_t *acm);
 
 /**
  * @brief   Read from the Rx fifo.
@@ -151,7 +151,7 @@ int zephyrAcmIsTxIrqReady(ZephyrACM *acm);
  *
  * @return  The number of byte read if successful, the error code otherwise.
  */
-int zephyrAcmReadFifo(ZephyrACM *acm);
+int zephyrAcmReadFifo(ZephyrACM_t *acm);
 
 /**
  * @brief   Write to the Tx fifo.
@@ -160,7 +160,7 @@ int zephyrAcmReadFifo(ZephyrACM *acm);
  *
  * @return  The number of byte written if successful, the error code otherwise.
  */
-int zephyrAcmWriteFifo(ZephyrACM *acm);
+int zephyrAcmWriteFifo(ZephyrACM_t *acm);
 
 /**
  * @brief   Read from the Rx ring buffer.
@@ -171,7 +171,7 @@ int zephyrAcmWriteFifo(ZephyrACM *acm);
  *
  * @return  The number of byte read if successful, the error code otherwise.
  */
-int zephyrAcmReadRingBuffer(ZephyrACM *acm, uint8_t *dataBuf,
+int zephyrAcmReadRingBuffer(ZephyrACM_t *acm, uint8_t *dataBuf,
                             size_t dataBufSize);
 
 /**
@@ -183,7 +183,7 @@ int zephyrAcmReadRingBuffer(ZephyrACM *acm, uint8_t *dataBuf,
  *
  * @return  The number of byte written if successful, the error code otherwise.
  */
-int zephyrAcmWriteRingBuffer(ZephyrACM *acm, uint8_t *dataBuf,
+int zephyrAcmWriteRingBuffer(ZephyrACM_t *acm, uint8_t *dataBuf,
                              size_t dataBufSize);
 
 #endif    /* USB_ACM_WRAPPER */

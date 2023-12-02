@@ -26,7 +26,7 @@ typedef struct
 {
   struct k_msgq msgq;               /**< The zephyr message queue structure. */
   char *buffer;                     /**< The message queue buffer. */
-} ZephyrMsgQueue;
+} ZephyrMsgQueue_t;
 
 /**
  * @brief   Initialize a zephyr message queue.
@@ -37,7 +37,7 @@ typedef struct
  *
  * @return              0 if successful, the error code otherwise.
  */
-int zephyrMsgQueueInit(ZephyrMsgQueue *queue, size_t msgSize, size_t maxMsgCnt);
+int zephyrMsgQueueInit(ZephyrMsgQueue_t *queue, size_t msgSize, size_t maxMsgCnt);
 
 /**
  * @brief   Push a message to a queue.
@@ -49,8 +49,8 @@ int zephyrMsgQueueInit(ZephyrMsgQueue *queue, size_t msgSize, size_t maxMsgCnt);
  *
  * @return            0 if successful, the error code otherwise.
  */
-int zephyrMsgQueuePush(ZephyrMsgQueue *queue, const void *msg,
-                       uint32_t timeout, ZephyrTimeUnit timeUnit);
+int zephyrMsgQueuePush(ZephyrMsgQueue_t *queue, const void *msg,
+                       uint32_t timeout, ZephyrTimeUnit_t timeUnit);
 
 /**
  * @brief   Pop a message from a queue.
@@ -62,8 +62,8 @@ int zephyrMsgQueuePush(ZephyrMsgQueue *queue, const void *msg,
  *
  * @return            0 if successful, the error code otherwise.
  */
-int zephyrMsgQueuePop(ZephyrMsgQueue *queue, void *msg,
-                      uint32_t timeout, ZephyrTimeUnit timeUnit);
+int zephyrMsgQueuePop(ZephyrMsgQueue_t *queue, void *msg,
+                      uint32_t timeout, ZephyrTimeUnit_t timeUnit);
 
 /**
  * @brief   Peek a queue for the next message.
@@ -73,14 +73,14 @@ int zephyrMsgQueuePop(ZephyrMsgQueue *queue, void *msg,
  *
  * @return            0 if successful, the error code otherwise.
  */
-int zephyrMsgQueuePeek(ZephyrMsgQueue *queue, void *msg);
+int zephyrMsgQueuePeek(ZephyrMsgQueue_t *queue, void *msg);
 
 /**
  * @brief   Purge a queue of its messages.
  *
  * @param queue       The zephyr message queue.
  */
-void zephyrMsgQueuePurge(ZephyrMsgQueue *queue);
+void zephyrMsgQueuePurge(ZephyrMsgQueue_t *queue);
 
 /**
  * @brief   Get the available free space in the queue.
@@ -89,7 +89,7 @@ void zephyrMsgQueuePurge(ZephyrMsgQueue *queue);
  *
  * @return            The number of empty message slots.
  */
-size_t zephyrMsgQueueGetFreeSpace(ZephyrMsgQueue *queue);
+size_t zephyrMsgQueueGetFreeSpace(ZephyrMsgQueue_t *queue);
 
 /**
  * @brief   Get the number of messages in the queue.
@@ -98,7 +98,7 @@ size_t zephyrMsgQueueGetFreeSpace(ZephyrMsgQueue *queue);
  *
  * @return            The number of messages in the queue.
  */
-size_t zephyrMsgQueueGetMsgCount(ZephyrMsgQueue *queue);
+size_t zephyrMsgQueueGetMsgCount(ZephyrMsgQueue_t *queue);
 
 
 #endif    /* MESSAGE_QUEUE_WRAPPER */

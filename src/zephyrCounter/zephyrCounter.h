@@ -29,7 +29,7 @@ typedef struct
   struct counter_config_info  counterConfig;              /**< The counter configuration. */
   struct counter_top_cfg topConfig;                       /**< The counter top (overflow) configuration. */
   struct counter_alarm_cfg *alarmConfigs;                 /**< The counter channel alarm configurations. */
-} ZephyrCounter;
+} ZephyrCounter_t;
 
 /**
  * @brief   Initialize the counter.
@@ -38,7 +38,7 @@ typedef struct
  *
  * @return              0 if successful, the error code otherwise.
 */
-int zephyrCounterInit(ZephyrCounter *counter);
+int zephyrCounterInit(ZephyrCounter_t *counter);
 
 /**
  * @brief   Check if the counter is counting up.
@@ -48,7 +48,7 @@ int zephyrCounterInit(ZephyrCounter *counter);
  * @return              True if the counter is counting up,
  *                      false if counting down.
 */
-bool zephyrCounterIsCountingUp(ZephyrCounter *counter);
+bool zephyrCounterIsCountingUp(ZephyrCounter_t *counter);
 
 /**
  * @brief   Get the counter number of channel.
@@ -57,7 +57,7 @@ bool zephyrCounterIsCountingUp(ZephyrCounter *counter);
  *
  * @return              The number of channel of the counter.
 */
-uint8_t zephyrCounterGetChannelCount(ZephyrCounter *counter);
+uint8_t zephyrCounterGetChannelCount(ZephyrCounter_t *counter);
 
 /**
  * @brief   Get the counter frequency in Hz.
@@ -67,7 +67,7 @@ uint8_t zephyrCounterGetChannelCount(ZephyrCounter *counter);
  * @return              The counter frequency in Hz. 0 if the counter does not
  *                      have a stable frequency.
 */
-uint32_t zephyrCounterGetFreq(ZephyrCounter *counter);
+uint32_t zephyrCounterGetFreq(ZephyrCounter_t *counter);
 
 /**
  * @brief   Convert the counter us to ticks.
@@ -77,7 +77,7 @@ uint32_t zephyrCounterGetFreq(ZephyrCounter *counter);
  *
  * @return              The converted value. Saturated if greater than 32 bits.
 */
-uint32_t zephyrCounterUsToTicks(ZephyrCounter *counter, uint64_t usVal);
+uint32_t zephyrCounterUsToTicks(ZephyrCounter_t *counter, uint64_t usVal);
 
 /**
  * @brief   Convert the counter ticks to us.
@@ -87,7 +87,7 @@ uint32_t zephyrCounterUsToTicks(ZephyrCounter *counter, uint64_t usVal);
  *
  * @return              The converted us value.
 */
-uint32_t zephyrCounterTicksToUs(ZephyrCounter *counter, uint32_t ticks);
+uint32_t zephyrCounterTicksToUs(ZephyrCounter_t *counter, uint32_t ticks);
 
 /**
  * @brief   Get the counter max top (overflow) value.
@@ -96,7 +96,7 @@ uint32_t zephyrCounterTicksToUs(ZephyrCounter *counter, uint32_t ticks);
  *
  * @return              The maximal top (overflow) value.
 */
-uint32_t zephyrCounterGetMaxTop(ZephyrCounter *counter);
+uint32_t zephyrCounterGetMaxTop(ZephyrCounter_t *counter);
 
 /**
  * @brief   Start the counter.
@@ -105,7 +105,7 @@ uint32_t zephyrCounterGetMaxTop(ZephyrCounter *counter);
  *
  * @return              0 if successful, the error code otherwise.
 */
-int zephyrCounterStart(ZephyrCounter *counter);
+int zephyrCounterStart(ZephyrCounter_t *counter);
 
 /**
  * @brief   Stop the counter.
@@ -114,7 +114,7 @@ int zephyrCounterStart(ZephyrCounter *counter);
  *
  * @return              0 if successful, the error code otherwise.
 */
-int zephyrCounterStop(ZephyrCounter *counter);
+int zephyrCounterStop(ZephyrCounter_t *counter);
 
 /**
  * @brief   Get the current counter tick count.
@@ -124,7 +124,7 @@ int zephyrCounterStop(ZephyrCounter *counter);
  *
  * @return              0 if successful, the error code otherwise.
 */
-int zephyrCounterGetTicks(ZephyrCounter *counter, uint32_t *ticks);
+int zephyrCounterGetTicks(ZephyrCounter_t *counter, uint32_t *ticks);
 
 /**
  * @brief   Get the current counter tick count in 64 bits.
@@ -134,7 +134,7 @@ int zephyrCounterGetTicks(ZephyrCounter *counter, uint32_t *ticks);
  *
  * @return              0 if successful, the error code otherwise.
 */
-int zephyrCounterGetTicks64(ZephyrCounter *counter, uint64_t *ticks);
+int zephyrCounterGetTicks64(ZephyrCounter_t *counter, uint64_t *ticks);
 
 /**
  * @brief   Set the desired channel alarm.
@@ -144,7 +144,7 @@ int zephyrCounterGetTicks64(ZephyrCounter *counter, uint64_t *ticks);
  *
  * @return              0 if successful, the error code otherwise.
 */
-int zephyrCounterSetChannelAlarm(ZephyrCounter *counter, uint8_t channelId);
+int zephyrCounterSetChannelAlarm(ZephyrCounter_t *counter, uint8_t channelId);
 
 /**
  * @brief   Cancel the desired channel alarm.
@@ -154,7 +154,7 @@ int zephyrCounterSetChannelAlarm(ZephyrCounter *counter, uint8_t channelId);
  *
  * @return              0 if successful, the error code otherwise.
 */
-int zephyrCounterCancelChannelAlarm(ZephyrCounter *counter, uint8_t channelId);
+int zephyrCounterCancelChannelAlarm(ZephyrCounter_t *counter, uint8_t channelId);
 
 /**
  * @brief   Set the counter top (overflow) value.
@@ -163,7 +163,7 @@ int zephyrCounterCancelChannelAlarm(ZephyrCounter *counter, uint8_t channelId);
  *
  * @return              0 if successful, the error code otherwise.
 */
-int zephyrCounterSetTop(ZephyrCounter *counter);
+int zephyrCounterSetTop(ZephyrCounter_t *counter);
 
 /**
  * @brief   Check if any interrupts are pending.
@@ -172,7 +172,7 @@ int zephyrCounterSetTop(ZephyrCounter *counter);
  *
  * @return              1 if any interrupts are pending, 0 otherwise.
 */
-int zephyrCounterGetPendingIrq(ZephyrCounter *counter);
+int zephyrCounterGetPendingIrq(ZephyrCounter_t *counter);
 
 /**
  * @brief   Get the current top (overflow) value.
@@ -181,7 +181,7 @@ int zephyrCounterGetPendingIrq(ZephyrCounter *counter);
  *
  * @return              The current top (overflow) value.
 */
-uint32_t zephyrCounterGetTop(ZephyrCounter *counter);
+uint32_t zephyrCounterGetTop(ZephyrCounter_t *counter);
 
 /**
  * @brief   Set the guard period.
@@ -192,7 +192,7 @@ uint32_t zephyrCounterGetTop(ZephyrCounter *counter);
  *
  * @return              0 if successful, the error code otherwise.
 */
-int zephyrCounterSetGuardPeriod(ZephyrCounter *counter, uint32_t ticks,
+int zephyrCounterSetGuardPeriod(ZephyrCounter_t *counter, uint32_t ticks,
                                 uint32_t flags);
 
 /**
@@ -204,7 +204,7 @@ int zephyrCounterSetGuardPeriod(ZephyrCounter *counter, uint32_t ticks,
  * @return              The guard period in counter ticks, 0 if the function of
  *                      flags are not supported.
 */
-uint32_t zephyrCounterGetGuardPeriod(ZephyrCounter *counter, uint32_t flags);
+uint32_t zephyrCounterGetGuardPeriod(ZephyrCounter_t *counter, uint32_t flags);
 
 #endif    /* COUNTER_WRAPPER */
 

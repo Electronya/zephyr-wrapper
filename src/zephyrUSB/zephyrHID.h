@@ -29,7 +29,7 @@ typedef struct
   uint8_t *descriptor;                              /**< The HID descriptor. */
   bool configured;                                  /**< The DC configured flag. */
   const struct hid_ops ops;                         /**< The HID operations. */
-} ZephyrHID;
+} ZephyrHID_t;
 
 /**
  * @brief   Initialize the HID device.
@@ -39,7 +39,7 @@ typedef struct
  *
  * @return  0 if successful, the error code otherwise.
  */
-int zephyrHidInit(ZephyrHID *hid, uint8_t *devLabel);
+int zephyrHidInit(ZephyrHID_t *hid, uint8_t *devLabel);
 
 /**
  * @brief   Write to the EP buffer.
@@ -51,7 +51,7 @@ int zephyrHidInit(ZephyrHID *hid, uint8_t *devLabel);
  *
  * @return  0 if successful, the error code otherwise.
  */
-int zephyrHidWriteToEp(ZephyrHID *hid, uint8_t *data, size_t size,
+int zephyrHidWriteToEp(ZephyrHID_t *hid, uint8_t *data, size_t size,
                        size_t *byteCnt);
 
 /**
@@ -64,7 +64,7 @@ int zephyrHidWriteToEp(ZephyrHID *hid, uint8_t *data, size_t size,
  *
  * @return  0 if successful, the error code otherwise.
  */
-int zephyrHidReadFromEp(ZephyrHID *hid, uint8_t *data, size_t size,
+int zephyrHidReadFromEp(ZephyrHID_t *hid, uint8_t *data, size_t size,
                         size_t *byteCnt);
 
 #endif    /* USB_HID_WRAPPER */

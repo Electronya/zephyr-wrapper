@@ -19,7 +19,7 @@
 
 LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
-int zephyrMsgQueueInit(ZephyrMsgQueue *queue, size_t msgSize, size_t maxMsgCnt)
+int zephyrMsgQueueInit(ZephyrMsgQueue_t *queue, size_t msgSize, size_t maxMsgCnt)
 {
   queue->buffer = k_malloc(msgSize * maxMsgCnt);
   if(!queue->buffer)
@@ -30,36 +30,36 @@ int zephyrMsgQueueInit(ZephyrMsgQueue *queue, size_t msgSize, size_t maxMsgCnt)
   return 0;
 }
 
-int zephyrMsgQueuePush(ZephyrMsgQueue *queue, const void *msg,
-                       uint32_t timeout, ZephyrTimeUnit timeUnit)
+int zephyrMsgQueuePush(ZephyrMsgQueue_t *queue, const void *msg,
+                       uint32_t timeout, ZephyrTimeUnit_t timeUnit)
 {
   return k_msgq_put(&queue->msgq, msg,
     zephyrCommonProcessTimeout(timeout, timeUnit));
 }
 
-int zephyrMsgQueuePop(ZephyrMsgQueue *queue, void *msg,
-                      uint32_t timeout, ZephyrTimeUnit timeUnit)
+int zephyrMsgQueuePop(ZephyrMsgQueue_t *queue, void *msg,
+                      uint32_t timeout, ZephyrTimeUnit_t timeUnit)
 {
   return k_msgq_get(&queue->msgq, msg,
     zephyrCommonProcessTimeout(timeout, timeUnit));
 }
 
-int zephyrMsgQueuePeek(ZephyrMsgQueue *queue, void *msg)
+int zephyrMsgQueuePeek(ZephyrMsgQueue_t *queue, void *msg)
 {
   return k_msgq_peek(&queue->msgq, msg);
 }
 
-void zephyrMsgQueuePurge(ZephyrMsgQueue *queue)
+void zephyrMsgQueuePurge(ZephyrMsgQueue_t *queue)
 {
   k_msgq_purge(&queue->msgq);
 }
 
-size_t zephyrMsgQueueGetFreeSpace(ZephyrMsgQueue *queue)
+size_t zephyrMsgQueueGetFreeSpace(ZephyrMsgQueue_t *queue)
 {
   return k_msgq_num_free_get(&queue->msgq);
 }
 
-size_t zephyrMsgQueueGetMsgCount(ZephyrMsgQueue *queue)
+size_t zephyrMsgQueueGetMsgCount(ZephyrMsgQueue_t *queue)
 {
   return k_msgq_num_used_get(&queue->msgq);
 }

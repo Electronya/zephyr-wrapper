@@ -18,7 +18,7 @@
 
 LOG_MODULE_REGISTER(ZEPHYR_WRAPPER_MODULE_NAME);
 
-k_timeout_t zephyrCommonProcessTimeout(uint32_t time, ZephyrTimeUnit unit)
+k_timeout_t zephyrCommonProcessTimeout(uint32_t time, ZephyrTimeUnit_t unit)
 {
   k_timeout_t zephyrTimeout;
 

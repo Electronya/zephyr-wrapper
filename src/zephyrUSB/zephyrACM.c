@@ -20,7 +20,7 @@
 
 LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
-int zephyrAcmInit(ZephyrACM *acm, size_t rxBufSize, size_t txBufsize)
+int zephyrAcmInit(ZephyrACM_t *acm, size_t rxBufSize, size_t txBufsize)
 {
   int rc;
 
@@ -56,59 +56,59 @@ int zephyrAcmInit(ZephyrACM *acm, size_t rxBufSize, size_t txBufsize)
   return rc;
 }
 
-int zephyrAcmGetCtrlLine(ZephyrACM *acm, ZephyrAcmCtrlLine ctrlLine,
+int zephyrAcmGetCtrlLine(ZephyrACM_t *acm, ZephyrAcmCtrlLine_t ctrlLine,
                          uint32_t *lineVal)
 {
   return uart_line_ctrl_get(acm->dev, ctrlLine, lineVal);
 }
 
-int zephyrAcmSetCtrlLine(ZephyrACM *acm, ZephyrAcmCtrlLine ctrlLine,
+int zephyrAcmSetCtrlLine(ZephyrACM_t *acm, ZephyrAcmCtrlLine_t ctrlLine,
                          uint32_t lineVal)
 {
   return uart_line_ctrl_set(acm->dev, ctrlLine, lineVal);
 }
 
-void zephyrAcmEnableTxIrq(ZephyrACM *acm)
+void zephyrAcmEnableTxIrq(ZephyrACM_t *acm)
 {
   uart_irq_rx_enable(acm->dev);
 }
 
-void zephyrAcmDisableTxIrq(ZephyrACM *acm)
+void zephyrAcmDisableTxIrq(ZephyrACM_t *acm)
 {
   uart_irq_rx_disable(acm->dev);
 }
 
-void zephyrAcmEnableRxIrq(ZephyrACM *acm)
+void zephyrAcmEnableRxIrq(ZephyrACM_t *acm)
 {
   uart_irq_tx_enable(acm->dev);
 }
 
-void zephyrAcmDisableRxIrq(ZephyrACM *acm)
+void zephyrAcmDisableRxIrq(ZephyrACM_t *acm)
 {
   uart_irq_tx_disable(acm->dev);
 }
 
-int zephyrAcmIrqUpdate(ZephyrACM *acm)
+int zephyrAcmIrqUpdate(ZephyrACM_t *acm)
 {
   return uart_irq_update(acm->dev);
 }
 
-int zephyrAcmIsIrqPending(ZephyrACM *acm)
+int zephyrAcmIsIrqPending(ZephyrACM_t *acm)
 {
   return uart_irq_is_pending(acm->dev);
 }
 
-int zephyrAcmIsRxIrqReady(ZephyrACM *acm)
+int zephyrAcmIsRxIrqReady(ZephyrACM_t *acm)
 {
   return uart_irq_rx_ready(acm->dev);
 }
 
-int zephyrAcmIsTxIrqReady(ZephyrACM *acm)
+int zephyrAcmIsTxIrqReady(ZephyrACM_t *acm)
 {
   return uart_irq_tx_ready(acm->dev);
 }
 
-int zephyrAcmReadFifo(ZephyrACM *acm)
+int zephyrAcmReadFifo(ZephyrACM_t *acm)
 {
   int rc;
   int rxByteCount;
@@ -135,7 +135,7 @@ int zephyrAcmReadFifo(ZephyrACM *acm)
   return rxByteCount;
 }
 
-int zephyrAcmWriteFifo(ZephyrACM *acm)
+int zephyrAcmWriteFifo(ZephyrACM_t *acm)
 {
   int rc;
   int txByteCount;
@@ -163,13 +163,13 @@ int zephyrAcmWriteFifo(ZephyrACM *acm)
   return txByteCount;
 }
 
-int zephyrAcmReadRingBuffer(ZephyrACM *acm, uint8_t *dataBuf,
+int zephyrAcmReadRingBuffer(ZephyrACM_t *acm, uint8_t *dataBuf,
                             size_t dataBufSize)
 {
   return ring_buf_get(&acm->rxRingBuf, dataBuf, dataBufSize);
 }
 
-int zephyrAcmWriteRingBuffer(ZephyrACM *acm, uint8_t *dataBuf,
+int zephyrAcmWriteRingBuffer(ZephyrACM_t *acm, uint8_t *dataBuf,
                              size_t dataBufSize)
 {
   return ring_buf_put(&acm->txRingBuf, dataBuf, dataBufSize);

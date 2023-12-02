@@ -23,7 +23,7 @@
 
 LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
-int zephyrGpioInit(ZephyrGpio *gpio, ZephyrGpioDir dir)
+int zephyrGpioInit(ZephyrGpio_t *gpio, ZephyrGpioDir_t dir)
 {
   int rc = -ENXIO;
 
@@ -41,7 +41,7 @@ int zephyrGpioInit(ZephyrGpio *gpio, ZephyrGpioDir dir)
   return rc;
 }
 
-int zephyrGpioEnableIrq(ZephyrGpio *gpio, ZephyrGpioIrqTrig trigger)
+int zephyrGpioEnableIrq(ZephyrGpio_t *gpio, ZephyrGpioIrqTrig_t trigger)
 {
   int rc;
 
@@ -52,7 +52,7 @@ int zephyrGpioEnableIrq(ZephyrGpio *gpio, ZephyrGpioIrqTrig trigger)
   return rc;
 }
 
-int zephyrGpioDisableIrq(ZephyrGpio *gpio)
+int zephyrGpioDisableIrq(ZephyrGpio_t *gpio)
 {
   int rc;
 
@@ -63,7 +63,7 @@ int zephyrGpioDisableIrq(ZephyrGpio *gpio)
   return rc;
 }
 
-int zephyrGpioAddIrqCallback(ZephyrGpio *gpio, ZephyrGpioIrqCb irqCb)
+int zephyrGpioAddIrqCallback(ZephyrGpio_t *gpio, ZephyrGpioIrqCb_t irqCb)
 {
   int rc;
 
@@ -75,37 +75,37 @@ int zephyrGpioAddIrqCallback(ZephyrGpio *gpio, ZephyrGpioIrqCb irqCb)
   return rc;
 }
 
-int zephyrGpioRemoveIrqCallback(ZephyrGpio *gpio)
+int zephyrGpioRemoveIrqCallback(ZephyrGpio_t *gpio)
 {
   return gpio_remove_callback(gpio->dev.port, &(gpio->cbStruct));
 }
 
-int zephyrGpioWrite(ZephyrGpio *gpio, ZephyrGpioState state)
+int zephyrGpioWrite(ZephyrGpio_t *gpio, ZephyrGpioState_t state)
 {
   return gpio_pin_set_dt(&(gpio->dev), state);
 }
 
-int zephyrGpioRead(ZephyrGpio *gpio)
+int zephyrGpioRead(ZephyrGpio_t *gpio)
 {
   return gpio_pin_get_dt(&(gpio->dev));
 }
 
-int zephyrGpioSet(ZephyrGpio *gpio)
+int zephyrGpioSet(ZephyrGpio_t *gpio)
 {
   return gpio_pin_set_dt(&(gpio->dev), GPIO_SET);
 }
 
-int zephyrGpioClear(ZephyrGpio *gpio)
+int zephyrGpioClear(ZephyrGpio_t *gpio)
 {
   return gpio_pin_set_dt(&(gpio->dev), GPIO_CLR);
 }
 
-int zephyrGpioToggle(ZephyrGpio *gpio)
+int zephyrGpioToggle(ZephyrGpio_t *gpio)
 {
   return gpio_pin_toggle_dt(&(gpio->dev));
 }
 
-int zephyrGpioPulse(ZephyrGpio *gpio, uint32_t width)
+int zephyrGpioPulse(ZephyrGpio_t *gpio, uint32_t width)
 {
   int rc;
 
