@@ -25,7 +25,7 @@ typedef struct zephyrGpio
 {
   const struct gpio_dt_spec dev;                      /**< The GPIO device. */
   struct gpio_callback cbStruct;                      /**< The callback structure. */
-} ZephyrGpio;
+} ZephyrGpio_t;
 
 /**
  * @brief   The zephyr GPIO directions.
@@ -36,7 +36,7 @@ typedef enum
   GPIO_OUT        = GPIO_OUTPUT,                      /**< The GPIO OUTPUT direction, */
   GPIO_OUT_CLR    = GPIO_OUTPUT_INACTIVE,             /**< The GPIO OUTPUT direction initialized as cleared. */
   GPIO_OUT_SET    = GPIO_OUTPUT_ACTIVE,               /**< The GPIO OUTPUT direction initialized as set. */
-} ZephyrGpioDir;
+} ZephyrGpioDir_t;
 
 /**
  * @brief   The zephyr GPIO interrupt triggers.
@@ -50,12 +50,12 @@ typedef enum
   GPIO_IRQ_EDGE_SET     = GPIO_INT_EDGE_TO_ACTIVE,    /**< The GPIO interrupt edge to set state trigger. */
   GPIO_IRQ_CLR          = GPIO_INT_LEVEL_INACTIVE,    /**< The GPIO interrupt clear state trigger. */
   GPIO_IRQ_SET          = GPIO_INT_LEVEL_ACTIVE,      /**< The GPIO interrupt set state trigger. */
-} ZephyrGpioIrqTrig;
+} ZephyrGpioIrqTrig_t;
 
 /**
  * @brief   The GPIO IRQ callback function.
  */
-typedef gpio_callback_handler_t ZephyrGpioIrqCb;
+typedef gpio_callback_handler_t ZephyrGpioIrqCb_t;
 
 /**
  * @brief   The Zephyr GPIO states.
@@ -64,7 +64,7 @@ typedef enum
 {
   GPIO_CLR = 0,                                       /**< The GPIO clear state. */
   GPIO_SET = 1,                                       /**< The GPIO set state. */
-} ZephyrGpioState;
+} ZephyrGpioState_t;
 
 /**
  * @brief   Initialize GPIO.
@@ -74,7 +74,7 @@ typedef enum
  *
  * @return        0 if successful, the error code otherwise.
  */
-int zephyrGpioInit(ZephyrGpio *gpio, ZephyrGpioDir dir);
+int zephyrGpioInit(ZephyrGpio_t *gpio, ZephyrGpioDir_t dir);
 
 /**
  * @brief   Enable the GPIO interrupt.
@@ -84,7 +84,7 @@ int zephyrGpioInit(ZephyrGpio *gpio, ZephyrGpioDir dir);
  *
  * @return        0 if successful, the error code otherwise.
  */
-int zephyrGpioEnableIrq(ZephyrGpio *gpio, ZephyrGpioIrqTrig trigger);
+int zephyrGpioEnableIrq(ZephyrGpio_t *gpio, ZephyrGpioIrqTrig_t trigger);
 
 /**
  * @brief   Disable the GPIO interrupt.
@@ -93,7 +93,7 @@ int zephyrGpioEnableIrq(ZephyrGpio *gpio, ZephyrGpioIrqTrig trigger);
  *
  * @return        0 if successful, the error code otherwise.
 */
-int zephyrGpioDisableIrq(ZephyrGpio *gpio);
+int zephyrGpioDisableIrq(ZephyrGpio_t *gpio);
 
 /**
  * @brief   Add an IRQ callback.
@@ -103,7 +103,7 @@ int zephyrGpioDisableIrq(ZephyrGpio *gpio);
  *
  * @return        0 if successful, the error code otherwise.
 */
-int zephyrGpioAddIrqCallback(ZephyrGpio *gpio, ZephyrGpioIrqCb irqCb);
+int zephyrGpioAddIrqCallback(ZephyrGpio_t *gpio, ZephyrGpioIrqCb_t irqCb);
 
 /**
  * @brief   Remove an IRQ callback.
@@ -112,7 +112,7 @@ int zephyrGpioAddIrqCallback(ZephyrGpio *gpio, ZephyrGpioIrqCb irqCb);
  *
  * @return        0 if successful, the error code otherwise.
 */
-int zephyrGpioRemoveIrqCallback(ZephyrGpio *gpio);
+int zephyrGpioRemoveIrqCallback(ZephyrGpio_t *gpio);
 
 /**
  * @brief   Write GPIO state.
@@ -122,7 +122,7 @@ int zephyrGpioRemoveIrqCallback(ZephyrGpio *gpio);
  *
  * @return        0 if successful, the error code otherwise.
  */
-int zephyrGpioWrite(ZephyrGpio *gpio, ZephyrGpioState state);
+int zephyrGpioWrite(ZephyrGpio_t *gpio, ZephyrGpioState_t state);
 
 /**
  * @brief   Read the state of the GPIO.
@@ -132,7 +132,7 @@ int zephyrGpioWrite(ZephyrGpio *gpio, ZephyrGpioState state);
  * @return        The GPIO state (0 or 1) if successful,
  *                the error code otherwise.
  */
-int zephyrGpioRead(ZephyrGpio *gpio);
+int zephyrGpioRead(ZephyrGpio_t *gpio);
 
 /**
  * @brief   Set the GPIO (set state to ON).
@@ -141,7 +141,7 @@ int zephyrGpioRead(ZephyrGpio *gpio);
  *
  * @return        0 if successful, the error code otherwise.
  */
-int zephyrGpioSet(ZephyrGpio *gpio);
+int zephyrGpioSet(ZephyrGpio_t *gpio);
 
 /**
  * @brief   Clear the GPIO (set state to OFF).
@@ -150,7 +150,7 @@ int zephyrGpioSet(ZephyrGpio *gpio);
  *
  * @return        0 if successful, the error code otherwise.
  */
-int zephyrGpioClear(ZephyrGpio *gpio);
+int zephyrGpioClear(ZephyrGpio_t *gpio);
 
 /**
  * @brief   Toggle the GPIO (flip the state).
@@ -159,7 +159,7 @@ int zephyrGpioClear(ZephyrGpio *gpio);
  *
  * @return        0 if successful, the error code otherwise.
  */
-int zephyrGpioToggle(ZephyrGpio *gpio);
+int zephyrGpioToggle(ZephyrGpio_t *gpio);
 
 /**
  * @brief   Pulse the GPIO (two toggle separated by X time).
@@ -169,7 +169,7 @@ int zephyrGpioToggle(ZephyrGpio *gpio);
  *
  * @return        0 if successful, the error code otherwise.
  */
-int zephyrGpioPulse(ZephyrGpio *gpio, uint32_t width);
+int zephyrGpioPulse(ZephyrGpio_t *gpio, uint32_t width);
 
 #endif    /* GPIO_WRAPPER */
 

@@ -4,6 +4,7 @@
 if(CONFIG_ENYA_ZEPHYR_WRAPPER)
   zephyr_include_directories(
     ./src/zephyrCommon/
+    ./src/zephyrMsgQueue/
     ./src/zephyrRingBuffer/
     ./src/zephyrThread/
     ./src/zephyrWorkQueue/
@@ -14,6 +15,7 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
   if(NOT DEFINED CONFIG_ZTEST)
     zephyr_library_sources(
       ./src/zephyrCommon/zephyrCommon.c
+      ./src/zephyrMsgQueue/zephyrMsgQueue.c
       ./src/zephyrRingBuffer/zephyrRingBuffer.c
       ./src/zephyrThread/zephyrThread.c
       ./src/zephyrWorkQueue/zephyrWork.c

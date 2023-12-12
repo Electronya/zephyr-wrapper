@@ -33,7 +33,7 @@ typedef struct
   void *p3;                                 /**< The entrypoint third parameter. */
   int priority;                             /**< The thread priority. */
   uint32_t options;                         /**< The thread options. */
-} ZephyrThread;
+} ZephyrThread_t;
 
 /**
  * @brief   Create a thread.
@@ -43,29 +43,29 @@ typedef struct
  * @param startDelay  The thread start delay.
  * @param timeUnit    The time unit of the start delay.
  */
-void zephyrThreadCreate(ZephyrThread *thread, char *name,
-                        uint32_t startDelay, ZephyrTimeUnit timeUnit);
+void zephyrThreadCreate(ZephyrThread_t *thread, char *name,
+                        uint32_t startDelay, ZephyrTimeUnit_t timeUnit);
 
 /**
  * @brief   Abort a thread.
  *
  * @param thread  The thread to abort.
  */
-void zephyrThreadAbort(ZephyrThread *thread);
+void zephyrThreadAbort(ZephyrThread_t *thread);
 
 /**
  * @brief   Start a thread.
  *
  * @param thread  The thread to start.
  */
-void zephyrThreadStart(ZephyrThread *thread);
+void zephyrThreadStart(ZephyrThread_t *thread);
 
 /**
  * @brief   Wake up a thread.
  *
  * @param thread  The thread to wake up.
  */
-void zephyrThreadWakeUp(ZephyrThread *thread);
+void zephyrThreadWakeUp(ZephyrThread_t *thread);
 
 /**
  * @brief   Check if the current thread can yield.
@@ -87,7 +87,7 @@ void zephyrThreadYield(void);
  *
  * @return  The number of milliseconds left to sleep when the thread wakes up.
  */
-uint32_t zephyrThreadSleep(uint32_t time, ZephyrTimeUnit unit);
+uint32_t zephyrThreadSleep(uint32_t time, ZephyrTimeUnit_t unit);
 
 /**
  * @brief   Make the current thread sleep for the provided amount
@@ -116,8 +116,8 @@ uint32_t zephyrThreadSleepUs(uint32_t us);
  * @param timeout     The timeout.
  * @param timeoutUnit The timeout time unit.
  */
-void zephyrThreadJoin(ZephyrThread *thread, uint32_t timeout,
-                      ZephyrTimeUnit timeoutUnit);
+void zephyrThreadJoin(ZephyrThread_t *thread, uint32_t timeout,
+                      ZephyrTimeUnit_t timeoutUnit);
 
 #endif    /* THREAD_WRAPPER */
 

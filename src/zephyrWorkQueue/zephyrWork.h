@@ -28,7 +28,7 @@ typedef struct
   struct k_work data;                           /**< The work data. */
   k_work_handler_t handler;                     /**< The work handler. */
   struct k_work_sync sync;                      /**< The work sync data. */
-} ZephyrWork;
+} ZephyrWork_t;
 
 /**
  * @brief The delayed work data structure.
@@ -38,14 +38,14 @@ typedef struct
   struct k_work_delayable data;                 /**< The delayed work data. */
   k_work_handler_t handler;                     /**< The delayed work handler. */
   struct k_work_sync sync;                      /**< The work sync data. */
-} ZephyrDelayedWork;
+} ZephyrDelayedWork_t;
 
 /**
  * @brief   Initialize the work.
  *
  * @param work  The work to initialize.
  */
-void zephyrWorkInit(ZephyrWork *work);
+void zephyrWorkInit(ZephyrWork_t *work);
 
 /**
  * @brief   Get the busy state of the work.
@@ -54,7 +54,7 @@ void zephyrWorkInit(ZephyrWork *work);
  *
  * @return  The work busy flags.
  */
-int zephyrWorkGetBusy(ZephyrWork *work);
+int zephyrWorkGetBusy(ZephyrWork_t *work);
 
 /**
  * @brief   Check if the work is pending.
@@ -63,7 +63,7 @@ int zephyrWorkGetBusy(ZephyrWork *work);
  *
  * @return  True if the work is pending, false otherwise.
  */
-bool zephyrWorkIsPending(ZephyrWork *work);
+bool zephyrWorkIsPending(ZephyrWork_t *work);
 
 /**
  * @brief   Submit the work to a specific queue.
@@ -76,7 +76,7 @@ bool zephyrWorkIsPending(ZephyrWork *work);
  *          - 2 if work is running and have been resubmitted,
  *          - the error code otherwise.
  */
-int zephyrWorkSubmitToQueue(ZephyrWorkQueue *queue, ZephyrWork *work);
+int zephyrWorkSubmitToQueue(ZephyrWorkQueue_t *queue, ZephyrWork_t *work);
 
 /**
  * @brief   Submit the work to the system queue.
@@ -88,7 +88,7 @@ int zephyrWorkSubmitToQueue(ZephyrWorkQueue *queue, ZephyrWork *work);
  *          - 2 if work is running and have been resubmitted,
  *          - the error code otherwise.
  */
-int zephyrWorkSubmit(ZephyrWork *work);
+int zephyrWorkSubmit(ZephyrWork_t *work);
 
 /**
  * @brief   Wait for the work to be flushed (to have been executed).
@@ -97,7 +97,7 @@ int zephyrWorkSubmit(ZephyrWork *work);
  *
  * @return  True if we had to wait, false otherwise.
  */
-bool zephyrWorkFlush(ZephyrWork *work);
+bool zephyrWorkFlush(ZephyrWork_t *work);
 
 /**
  * @brief   Cancel the work.
@@ -106,7 +106,7 @@ bool zephyrWorkFlush(ZephyrWork *work);
  *
  * @return  The work busy flags.
  */
-int zephyrWorkCancel(ZephyrWork *work);
+int zephyrWorkCancel(ZephyrWork_t *work);
 
 /**
  * @brief   Cancel the work and wait for it to complete.
@@ -115,14 +115,14 @@ int zephyrWorkCancel(ZephyrWork *work);
  *
  * @return  True if work was pending, false otherwise
  */
-bool zephyrWorkCancelSync(ZephyrWork *work);
+bool zephyrWorkCancelSync(ZephyrWork_t *work);
 
 /**
  * @brief   Initialize the delayed work.
  *
  * @param work  The delayed work to initialize.
  */
-void zephyrDelayedWorkInit(ZephyrDelayedWork *work);
+void zephyrDelayedWorkInit(ZephyrDelayedWork_t *work);
 
 /**
  * @brief   Get the busy state of the delayed work.
@@ -131,7 +131,7 @@ void zephyrDelayedWorkInit(ZephyrDelayedWork *work);
  *
  * @return  The work busy flags.
  */
-int zephyrDelayedWorkGetBusy(ZephyrDelayedWork *work);
+int zephyrDelayedWorkGetBusy(ZephyrDelayedWork_t *work);
 
 /**
  * @brief   Check if the delayed work is pending.
@@ -140,7 +140,7 @@ int zephyrDelayedWorkGetBusy(ZephyrDelayedWork *work);
  *
  * @return  True if the work is pending, false otherwise.
  */
-bool zephyrDelayedWorkIsPending(ZephyrDelayedWork *work);
+bool zephyrDelayedWorkIsPending(ZephyrDelayedWork_t *work);
 
 /**
  * @brief   Get the absolute tick count until the delayed work expires
@@ -150,7 +150,7 @@ bool zephyrDelayedWorkIsPending(ZephyrDelayedWork *work);
  *
  * @return  The absolute tick count until expiration.
  */
-k_ticks_t zephyrDelayedWorkGetExpire(ZephyrDelayedWork *work);
+k_ticks_t zephyrDelayedWorkGetExpire(ZephyrDelayedWork_t *work);
 
 /**
  * @brief   Get the remaining tick count until the delayed work expires
@@ -160,7 +160,7 @@ k_ticks_t zephyrDelayedWorkGetExpire(ZephyrDelayedWork *work);
  *
  * @return  The remaining tick count until expiration.
  */
-k_ticks_t zephyrDelayedWorkGetRemaining(ZephyrDelayedWork *work);
+k_ticks_t zephyrDelayedWorkGetRemaining(ZephyrDelayedWork_t *work);
 
 /**
  * @brief   Schedule the delayed work to a specific queue.
@@ -174,9 +174,9 @@ k_ticks_t zephyrDelayedWorkGetRemaining(ZephyrDelayedWork *work);
  *          - 1 if work was scheduled,
  *          - the error code otherwise.
  */
-int zephyrDelayedWorkScheduleToQueue(ZephyrWorkQueue *queue,
-                                     ZephyrDelayedWork *work, uint32_t delay,
-                                     ZephyrTimeUnit unit);
+int zephyrDelayedWorkScheduleToQueue(ZephyrWorkQueue_t *queue,
+                                     ZephyrDelayedWork_t *work, uint32_t delay,
+                                     ZephyrTimeUnit_t unit);
 
 /**
  * @brief   Schedule the delayed work to the system queue.
@@ -189,8 +189,8 @@ int zephyrDelayedWorkScheduleToQueue(ZephyrWorkQueue *queue,
  *          - 1 if work was scheduled,
  *          - the error code otherwise.
  */
-int zephyrDelayedWorkSchedule(ZephyrDelayedWork *work, uint32_t delay,
-                              ZephyrTimeUnit unit);
+int zephyrDelayedWorkSchedule(ZephyrDelayedWork_t *work, uint32_t delay,
+                              ZephyrTimeUnit_t unit);
 
 /**
  * @brief   Reschedule the delayed work to a specific queue.
@@ -205,9 +205,9 @@ int zephyrDelayedWorkSchedule(ZephyrDelayedWork *work, uint32_t delay,
  *          - 2 if work is running and have been rescheduled,
  *          - the error code otherwise.
  */
-int zephyrDelayedWorkRescheduleToQueue(ZephyrWorkQueue *queue,
-                                       ZephyrDelayedWork *work, uint32_t delay,
-                                       ZephyrTimeUnit unit);
+int zephyrDelayedWorkRescheduleToQueue(ZephyrWorkQueue_t *queue,
+                                       ZephyrDelayedWork_t *work, uint32_t delay,
+                                       ZephyrTimeUnit_t unit);
 
 /**
  * @brief   Reschedule the delayed work to the system queue.
@@ -221,8 +221,8 @@ int zephyrDelayedWorkRescheduleToQueue(ZephyrWorkQueue *queue,
  *          - 2 if work is running and have been rescheduled,
  *          - the error code otherwise.
  */
-int zephyrDelayedWorkReschedule(ZephyrDelayedWork *work, uint32_t delay,
-                                ZephyrTimeUnit unit);
+int zephyrDelayedWorkReschedule(ZephyrDelayedWork_t *work, uint32_t delay,
+                                ZephyrTimeUnit_t unit);
 
 /**
  * @brief   Wait for the delayed work to be flushed (to have been executed).
@@ -231,7 +231,7 @@ int zephyrDelayedWorkReschedule(ZephyrDelayedWork *work, uint32_t delay,
  *
  * @return  True if we had to wait, false otherwise.
  */
-bool zephyrDelayedWorkFlush(ZephyrDelayedWork *work);
+bool zephyrDelayedWorkFlush(ZephyrDelayedWork_t *work);
 
 /**
  * @brief   Cancel the delayed work.
@@ -240,7 +240,7 @@ bool zephyrDelayedWorkFlush(ZephyrDelayedWork *work);
  *
  * @return  The work busy flags.
  */
-int zephyrDelayedWorkCancel(ZephyrDelayedWork *work);
+int zephyrDelayedWorkCancel(ZephyrDelayedWork_t *work);
 
 /**
  * @brief   Cancel the delayed work and wait for it to complete.
@@ -249,7 +249,7 @@ int zephyrDelayedWorkCancel(ZephyrDelayedWork *work);
  *
  * @return  True if work was pending, false otherwise
  */
-bool zephyrDelayedWorkCancelSync(ZephyrDelayedWork *work);
+bool zephyrDelayedWorkCancelSync(ZephyrDelayedWork_t *work);
 
 #endif    /* WORK_WRAPPER */
 

@@ -19,111 +19,111 @@
 
 LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
-void zephyrWorkInit(ZephyrWork *work)
+void zephyrWorkInit(ZephyrWork_t *work)
 {
   k_work_init(&work->data, work->handler);
 }
 
-int zephyrWorkGetBusy(ZephyrWork *work)
+int zephyrWorkGetBusy(ZephyrWork_t *work)
 {
   return k_work_busy_get(&work->data);
 }
 
-bool zephyrWorkIsPending(ZephyrWork *work)
+bool zephyrWorkIsPending(ZephyrWork_t *work)
 {
   return k_work_is_pending(&work->data);
 }
 
-int zephyrWorkSubmitToQueue(ZephyrWorkQueue *queue, ZephyrWork *work)
+int zephyrWorkSubmitToQueue(ZephyrWorkQueue_t *queue, ZephyrWork_t *work)
 {
   return k_work_submit_to_queue(&queue->data, &work->data);
 }
 
-int zephyrWorkSubmit(ZephyrWork *work)
+int zephyrWorkSubmit(ZephyrWork_t *work)
 {
   return k_work_submit(&work->data);
 }
 
-bool zephyrWorkFlush(ZephyrWork *work)
+bool zephyrWorkFlush(ZephyrWork_t *work)
 {
   return k_work_flush(&work->data, &work->sync);
 }
 
-int zephyrWorkCancel(ZephyrWork *work)
+int zephyrWorkCancel(ZephyrWork_t *work)
 {
   return k_work_cancel(&work->data);
 }
 
-bool zephyrWorkCancelSync(ZephyrWork *work)
+bool zephyrWorkCancelSync(ZephyrWork_t *work)
 {
   return k_work_cancel_sync(&work->data, &work->sync);
 }
 
-void zephyrDelayedWorkInit(ZephyrDelayedWork *work)
+void zephyrDelayedWorkInit(ZephyrDelayedWork_t *work)
 {
   k_work_init_delayable(&work->data, work->handler);
 }
 
-int zephyrDelayedWorkGetBusy(ZephyrDelayedWork *work)
+int zephyrDelayedWorkGetBusy(ZephyrDelayedWork_t *work)
 {
   return k_work_delayable_busy_get(&work->data);
 }
 
-bool zephyrDelayedWorkIsPending(ZephyrDelayedWork *work)
+bool zephyrDelayedWorkIsPending(ZephyrDelayedWork_t *work)
 {
   return k_work_delayable_is_pending(&work->data);
 }
 
-k_ticks_t zephyrDelayedWorkGetExpire(ZephyrDelayedWork *work)
+k_ticks_t zephyrDelayedWorkGetExpire(ZephyrDelayedWork_t *work)
 {
   return k_work_delayable_expires_get(&work->data);
 }
 
-k_ticks_t zephyrDelayedWorkGetRemaining(ZephyrDelayedWork *work)
+k_ticks_t zephyrDelayedWorkGetRemaining(ZephyrDelayedWork_t *work)
 {
   return k_work_delayable_remaining_get(&work->data);
 }
 
-int zephyrDelayedWorkScheduleToQueue(ZephyrWorkQueue *queue,
-                                     ZephyrDelayedWork *work, uint32_t delay,
-                                     ZephyrTimeUnit unit)
+int zephyrDelayedWorkScheduleToQueue(ZephyrWorkQueue_t *queue,
+                                     ZephyrDelayedWork_t *work, uint32_t delay,
+                                     ZephyrTimeUnit_t unit)
 {
   return k_work_schedule_for_queue(&queue->data, &work->data,
     zephyrCommonProcessTimeout(delay, unit));
 }
 
-int zephyrDelayedWorkSchedule(ZephyrDelayedWork *work, uint32_t delay,
-                              ZephyrTimeUnit unit)
+int zephyrDelayedWorkSchedule(ZephyrDelayedWork_t *work, uint32_t delay,
+                              ZephyrTimeUnit_t unit)
 {
   return k_work_schedule(&work->data, zephyrCommonProcessTimeout(delay, unit));
 }
 
-int zephyrDelayedWorkRescheduleToQueue(ZephyrWorkQueue *queue,
-                                       ZephyrDelayedWork *work, uint32_t delay,
-                                       ZephyrTimeUnit unit)
+int zephyrDelayedWorkRescheduleToQueue(ZephyrWorkQueue_t *queue,
+                                       ZephyrDelayedWork_t *work, uint32_t delay,
+                                       ZephyrTimeUnit_t unit)
 {
   return k_work_reschedule_for_queue(&queue->data, &work->data,
     zephyrCommonProcessTimeout(delay, unit));
 }
 
-int zephyrDelayedWorkReschedule(ZephyrDelayedWork *work, uint32_t delay,
-                                ZephyrTimeUnit unit)
+int zephyrDelayedWorkReschedule(ZephyrDelayedWork_t *work, uint32_t delay,
+                                ZephyrTimeUnit_t unit)
 {
   return k_work_reschedule(&work->data,
     zephyrCommonProcessTimeout(delay, unit));
 }
 
-bool zephyrDelayedWorkFlush(ZephyrDelayedWork *work)
+bool zephyrDelayedWorkFlush(ZephyrDelayedWork_t *work)
 {
   return k_work_flush_delayable(&work->data, &work->sync);
 }
 
-int zephyrDelayedWorkCancel(ZephyrDelayedWork *work)
+int zephyrDelayedWorkCancel(ZephyrDelayedWork_t *work)
 {
   return k_work_cancel_delayable(&work->data);
 }
 
-bool zephyrDelayedWorkCancelSync(ZephyrDelayedWork *work)
+bool zephyrDelayedWorkCancelSync(ZephyrDelayedWork_t *work)
 {
   return k_work_cancel_delayable_sync(&work->data, &work->sync);
 }

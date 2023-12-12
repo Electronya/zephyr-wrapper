@@ -20,28 +20,28 @@
 
 LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
-void zephyrWorkQueueInit(ZephyrWorkQueue *queue)
+void zephyrWorkQueueInit(ZephyrWorkQueue_t *queue)
 {
   k_work_queue_init(&queue->data);
 }
 
-void zephyrWorkerQueueStart(ZephyrWorkQueue *queue)
+void zephyrWorkerQueueStart(ZephyrWorkQueue_t *queue)
 {
   k_work_queue_start(&queue->data, queue->stack, queue->stackSize,
     queue->priority, &queue->config);
 }
 
-k_tid_t zephyrWorkQueueGetThread(ZephyrWorkQueue *queue)
+k_tid_t zephyrWorkQueueGetThread(ZephyrWorkQueue_t *queue)
 {
   return k_work_queue_thread_get(&queue->data);
 }
 
-int zephyrWorkQueueDrain(ZephyrWorkQueue *queue, bool usePlug)
+int zephyrWorkQueueDrain(ZephyrWorkQueue_t *queue, bool usePlug)
 {
   return k_work_queue_drain(&queue->data, usePlug);
 }
 
-int zephyrWorkQueueUnplug(ZephyrWorkQueue *queue)
+int zephyrWorkQueueUnplug(ZephyrWorkQueue_t *queue)
 {
   return k_work_queue_unplug(&queue->data);
 }

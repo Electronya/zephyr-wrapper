@@ -56,7 +56,7 @@ typedef enum
   SECONDS,                                /**< The second time unit. */
   MINUTES,                                /**< The minute time unit. */
   HOURS,                                  /**< The hour time unit. */
-} ZephyrTimeUnit;
+} ZephyrTimeUnit_t;
 
 /**
  * @brief Process a Zephyr timeout.
@@ -66,7 +66,7 @@ typedef enum
  *
  * @return              The processed Zephyr timeout.
  */
-k_timeout_t zephyrCommonProcessTimeout(uint32_t time, ZephyrTimeUnit unit);
+k_timeout_t zephyrCommonProcessTimeout(uint32_t time, ZephyrTimeUnit_t unit);
 
 #endif    /* COMMON_WRAPPER */
 

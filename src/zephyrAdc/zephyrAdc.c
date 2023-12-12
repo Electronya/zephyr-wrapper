@@ -42,7 +42,7 @@ static AdcCtrlData adcCtrlData;
  *
  * @return  0 if successful, the error code otherwise.
  */
-int initAdcChannel(ZephyrAdcChanConfig *config)
+int initAdcChannel(ZephyrAdcChanConfig_t *config)
 {
   int rc;
 
@@ -59,8 +59,8 @@ int initAdcChannel(ZephyrAdcChanConfig *config)
   return rc;
 }
 
-int zephyrAdcInit(ZephyrAdcChanConfig *configs, size_t chanCount,
-                  ZephyrAdcRes res, uint32_t vdd)
+int zephyrAdcInit(ZephyrAdcChanConfig_t *configs, size_t chanCount,
+                  ZephyrAdcRes_t res, uint32_t vdd)
 {
   int rc = 0;
 
@@ -74,7 +74,7 @@ int zephyrAdcInit(ZephyrAdcChanConfig *configs, size_t chanCount,
   adcCtrlData.vdd = vdd;
   adcCtrlData.seq.resolution = res;
   adcCtrlData.chanUsedCnt = chanCount;
-  adcCtrlData.chanCfgs = k_malloc(sizeof(ZephyrAdcChanConfig) * chanCount);
+  adcCtrlData.chanCfgs = k_malloc(sizeof(ZephyrAdcChanConfig_t) * chanCount);
   if(!adcCtrlData.chanCfgs)
   {
     LOG_ERR("unable to allocate all the ADC channel config");
