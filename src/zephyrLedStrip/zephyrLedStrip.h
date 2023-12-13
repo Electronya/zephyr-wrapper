@@ -27,7 +27,7 @@
 /**
  * @brief   The pixel type.
 */
-typedef struct led_rgb ZepyrRgbPixel_t;
+typedef struct led_rgb ZephyrRgbPixel_t;
 
 /**
  * @brief   The LED strip data structure.
