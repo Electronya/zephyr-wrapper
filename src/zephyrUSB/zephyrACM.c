@@ -90,10 +90,6 @@ int zephyrAcmStart(ZephyrACM *acm)
   if(rc < 0)
     LOG_ERR("unable to set the IRQ callback");
 
-  rc = uart_irq_callback_set(acm->dev, acm->cb);
-  if(rc < 0)
-    LOG_ERR("unable to set the IRQ callback");
-
   uart_irq_rx_enable(acm->dev);
 
   return rc;
