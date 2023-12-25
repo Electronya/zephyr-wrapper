@@ -49,10 +49,6 @@ int zephyrAcmInit(ZephyrACM *acm, size_t rxBufSize, size_t txBufsize)
   ring_buf_init(&acm->rxRingBuf, rxBufSize, acm->rxBuffer);
   ring_buf_init(&acm->txRingBuf, txBufsize, acm->txBuffer);
 
-  rc = uart_irq_callback_set(acm->dev, acm->cb);
-  if(rc < 0)
-    LOG_ERR("unable to set the IRQ callback");
-
   return rc;
 }
 
@@ -89,6 +85,10 @@ int zephyrAcmStart(ZephyrACM *acm)
 		LOG_DBG("Failed to get baudrate, rc code %d", rc);
 	else
 		LOG_DBG("Baudrate detected: %d", baudrate);
+
+  rc = uart_irq_callback_set(acm->dev, acm->cb);
+  if(rc < 0)
+    LOG_ERR("unable to set the IRQ callback");
 
   rc = uart_irq_callback_set(acm->dev, acm->cb);
   if(rc < 0)
