@@ -69,6 +69,7 @@ int zephyrAcmStart(ZephyrACM *acm)
 		  k_sleep(K_MSEC(100));
   }
 
+  LOG_DBG("DTR set");
   /* They are optional, we use them to test the interrupt endpoint */
 	rc = uart_line_ctrl_set(acm->dev, UART_LINE_CTRL_DCD, 1);
 	if(rc < 0)
