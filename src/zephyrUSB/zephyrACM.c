@@ -59,13 +59,14 @@ int zephyrAcmStart(ZephyrACM *acm)
   uint32_t baudrate;
 
   /* wait for DTR assertion */
+  LOG_DBG("wait for DTR");
   while(1)
   {
     uart_line_ctrl_get(acm->dev, UART_LINE_CTRL_DTR, &dtr);
 		if(dtr)
 			break;
-
-		k_sleep(K_MSEC(100));
+    else
+		  k_sleep(K_MSEC(100));
   }
 
   /* They are optional, we use them to test the interrupt endpoint */
