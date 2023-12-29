@@ -22,8 +22,6 @@ LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
 int zephyrAcmInit(ZephyrACM *acm, size_t rxBufSize, size_t txBufsize)
 {
-  int rc;
-
   acm->dev = DEVICE_DT_GET_ONE(zephyr_cdc_acm_uart);
 	if (!device_is_ready(acm->dev))
   {
@@ -49,7 +47,7 @@ int zephyrAcmInit(ZephyrACM *acm, size_t rxBufSize, size_t txBufsize)
   ring_buf_init(&acm->rxRingBuf, rxBufSize, acm->rxBuffer);
   ring_buf_init(&acm->txRingBuf, txBufsize, acm->txBuffer);
 
-  return rc;
+  return 0;
 }
 
 int zephyrAcmStart(ZephyrACM *acm)
@@ -65,8 +63,8 @@ int zephyrAcmStart(ZephyrACM *acm)
     uart_line_ctrl_get(acm->dev, UART_LINE_CTRL_DTR, &dtr);
 		if(dtr)
 			break;
-    else
-		  k_sleep(K_MSEC(100));
+
+    k_sleep(K_MSEC(100));
   }
 
   LOG_DBG("DTR set");
