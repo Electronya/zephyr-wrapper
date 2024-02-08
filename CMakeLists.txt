@@ -54,20 +54,28 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
       zephyr_library_sources(./src/zephyrLedStrip/zephyrLedStrip.c)
     endif()
   endif()
-endif()
 
-# USB stuff.
-if(CONFIG_ENYA_USB)
-  zephyr_include_directories(./src/zephyrUSB/)
-  if(NOT DEFINED CONFIG_ZTEST)
-    zephyr_library_sources(./src/zephyrUSB/zephyrUSB.c)
+  # NVS settings wrapper.
+  if(CONFIG_ENY_NVS_SETTINGS)
+    zephyr_include_directories(./src/zephyrLedStrip/)
+    if(NOT DEFINED CONFIG_ZTEST)
+      zephyr_library_sources(./src/zephyrLedStrip/zephyrLedStrip.c)
+    endif()
   endif()
-  # USB CDC ACM
-  if(CONFIG_ENYA_USB_ACM AND NOT DEFINED CONFIG_ZTEST)
-    zephyr_library_sources(./src/zephyrUSB/zephyrACM.c)
-  endif()
-  # USB HID
-  if(CONFIG_ENYA_USB_HID AND NOT DEFINED CONFIG_ZTEST)
-  zephyr_library_sources(./src/zephyrUSB/zephyrHID.c)
+
+  # USB stuff.
+  if(CONFIG_ENYA_USB)
+    zephyr_include_directories(./src/zephyrUSB/)
+    if(NOT DEFINED CONFIG_ZTEST)
+      zephyr_library_sources(./src/zephyrUSB/zephyrUSB.c)
+    endif()
+    # USB CDC ACM
+    if(CONFIG_ENYA_USB_ACM AND NOT DEFINED CONFIG_ZTEST)
+      zephyr_library_sources(./src/zephyrUSB/zephyrACM.c)
+    endif()
+    # USB HID
+    if(CONFIG_ENYA_USB_HID AND NOT DEFINED CONFIG_ZTEST)
+      zephyr_library_sources(./src/zephyrUSB/zephyrHID.c)
+    endif()
   endif()
 endif()
