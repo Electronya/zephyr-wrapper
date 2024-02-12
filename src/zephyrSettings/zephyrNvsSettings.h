@@ -92,11 +92,11 @@ int zephyrNvsSettingsCommit(void);
 /**
  * @brief   Commit a subtree of settings.
  *
- * @param name      The settings subtree name.
+ * @param subtree   The settings subtree name.
  *
  * @return  0 if successful, the error code otherwise.
  */
-int zephyrNvsSettingsCommitSubtree(const char *name);
+int zephyrNvsSettingsCommitSubtree(const char *subtree);
 
 #endif    /* NVS_SETTINGS_WRAPPER */
 

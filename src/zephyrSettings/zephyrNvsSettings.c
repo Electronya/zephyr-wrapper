@@ -17,44 +17,103 @@
 
 LOG_MODULE_DECLARE(ZEPHYR_WRAPPER_MODULE_NAME);
 
+int zephyrNvsSettingsInit(void)
+{
+  int rc;
+
+  rc = settings_subsys_init();
+  if(rc < 0)
+    LOG_ERR("unable to initialize the setting subsystem");
+
+  return rc;
+}
+
 int zephyrNvsSettingsRegister(ZephyrNvsSetting_t *setting)
 {
-  return 0;
+  int rc;
+
+  rc = settings_register(setting);
+  if(rc < 0)
+    LOG_ERR("unable to register setting: %s", setting->name);
+
+  return rc;
 }
 
 int zephyrNvsSettingsLoad(void)
 {
-  return 0;
+  int rc;
+
+  rc = settings_load();
+  if(rc < 0)
+    LOG_ERR("unable to load the settings");
+
+  return rc;
 }
 
 int zephyrNvsSettingsLoadSubtree(const char *subtree)
 {
-  return 0;
+  int rc;
+
+  rc = settings_load_subtree(subtree);
+  if(rc < 0)
+    LOG_ERR("unable to load subtree: %s", subtree);
+
+  return rc;
 }
 
 int zephyrNvsSettingsSave(void)
 {
-  return 0;
+  int rc;
+
+  rc = settings_save();
+  if(rc < 0)
+    LOG_ERR("unable to save the settings");
+
+  return rc;
 }
 
 int zephyrNvsSettingsSaveOne(const char *name, const void *value, size_t size)
 {
-  return 0;
+  int rc;
+
+  rc = settings_save_one(name, value, size);
+  if(rc < 0)
+    LOG_ERR("unable to save setting: %s", name);
+
+  return rc;
 }
 
 int zephyrNvsSettingsDelete(const char *name)
 {
-  return 0;
+  int rc;
+
+  rc = settings_delete(name);
+  if(rc < 0)
+    LOG_ERR("unable to delete setting: %s", name);
+
+  return rc;
 }
 
 int zephyrNvsSettingsCommit(void)
 {
-  return 0;
+  int rc;
+
+  rc = settings_commit();
+  if(rc < 0)
+    LOG_ERR("unable to commit settings");
+
+  return rc;
 }
 
-int zephyrNvsSettingsCommitSubtree(const char *name)
+int zephyrNvsSettingsCommitSubtree(const char *subtree)
 {
-  return 0;
+  int rc;
+
+  rc = settings_commit_subtree(subtree);
+  if(rc < 0)
+    LOG_ERR("unable to commit subtree: %s", subtree);
+
+  return rc;
 }
 
 /** @} */
