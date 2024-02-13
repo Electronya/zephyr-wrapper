@@ -57,9 +57,9 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
 
   # NVS settings wrapper.
   if(CONFIG_ENY_NVS_SETTINGS)
-    zephyr_include_directories(./src/zephyrNvsSettings/)
+    zephyr_include_directories(./src/zephyrSettings/)
     if(NOT DEFINED CONFIG_ZTEST)
-      zephyr_library_sources(./src/zephyrNvsSettings/zephyrNvsSettings.c)
+      zephyr_library_sources(./src/zephyrSettings/zephyrNvsSettings.c)
     endif()
   endif()
 
