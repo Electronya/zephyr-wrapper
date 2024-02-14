@@ -57,6 +57,7 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
 
   # NVS settings wrapper.
   if(CONFIG_ENYA_NVS_SETTINGS)
+    message("PROUT")
     zephyr_include_directories(./src/zephyrSettings/)
     if(NOT DEFINED CONFIG_ZTEST)
       zephyr_library_sources(./src/zephyrSettings/zephyrNvsSettings.c)
