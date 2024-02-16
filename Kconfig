@@ -35,6 +35,13 @@ config ENYA_LED_STRIP
         help
             Enable the LED strip wrapper.
 
+config ENYA_NVS_SETTINGS
+        bool "NVS settings wrapper"
+        default n
+        depends on ENYA_ZEPHYR_WRAPPER && CONFIG_SETTINGS_NVS
+        help
+          Enable the NVS settings wrapper.
+
 config ENYA_USB
         bool "USB wrapper"
         default n
