@@ -49,7 +49,6 @@ if(CONFIG_ENYA_ZEPHYR_WRAPPER)
 
   # LED strip wrapper.
   if(CONFIG_ENYA_LED_STRIP)
-    message("PROUT")
     zephyr_include_directories(./src/zephyrLedStrip/)
     if(NOT DEFINED CONFIG_ZTEST)
       zephyr_library_sources(./src/zephyrLedStrip/zephyrLedStrip.c)
